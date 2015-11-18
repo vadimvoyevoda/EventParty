@@ -7,7 +7,7 @@ label{
     font-weight:normal;
 }
 
-input[type="text"], textarea {
+fieldset input[type="text"], textarea {
     padding: 4px 12px;
     font-size: 14px;
     line-height: 1.42857143;
@@ -23,13 +23,13 @@ input[type="text"], textarea {
     transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;    
 }
 
-input[type="text"]:focus, textarea:focus {
+fieldset input[type="text"]:focus, textarea:focus {
     box-shadow: 0 0 7px 3px #C0E5F4;
     border-width: 1px;
     font-family:cursive;
 }
 
-input[type=checkbox] {
+fieldset input[type=checkbox] {
     display:inline-block;
     vertical-align: middle;
     width: 18px;
@@ -107,7 +107,7 @@ select, #City  {
     margin-bottom:10px;
 }
 
-form {
+fieldset {
     width: 70%;
     margin-left: auto;
     margin-right: auto;

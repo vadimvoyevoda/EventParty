@@ -167,6 +167,7 @@
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Concrete\PhotoManager.cs" />
+    <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
@@ -470,6 +471,7 @@
     <Content Include="Views\Event\AdvancedSearch.cshtml" />
     <Content Include="Views\Event\FilteredSearch.cshtml" />
     <Content Include="Views\Event\EventDetails.cshtml" />
+    <Content Include="Views\About\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

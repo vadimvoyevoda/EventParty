@@ -43,7 +43,7 @@
                 <h2>for all people</h2>
                 <p>Everyone can find something for themselves</p>
                 <div class="banner_btn">
-                    <a href="#">Read More</a>
+                    <a href="/About/Index">Read More</a>
                 </div>
             </div>
         </div>
@@ -67,7 +67,7 @@
                     <li id="home"><a href="/Home/Index">Home<img id="iconImg" src="/images/home.png" /></a></li>
                     <li id="advancedSearch"><a href="/Event/AdvancedSearch">Advanced Search<img id="iconImg" src="/images/search.gif" /></a></li>
                     <li id="addEvent"><a href="/Event/Index">Add Event<img id="iconImg" src="/images/add.png" /></a></li>
-                    <li id="about"><a href="">About us<img id="iconImg" src="/images/about.png" /></a></li>
+                    <li id="about"><a href="/About/Index">About us<img id="iconImg" src="/images/about.png" /></a></li>
                     <li id="profile"><a href="/Profile/Index"><span id="profileName">@( String.IsNullOrEmpty(HttpContext.Current.User.Identity.Name) ? "My Profile" : HttpContext.Current.User.Identity.Name)</span><img id="iconImg" src="/images/user.png" /></a></li>   
                     @if (HttpContext.Current.User.Identity.IsAuthenticated)
                     {
@@ -107,9 +107,9 @@
                 <div class="col-md-4">
                     <ul class="list">
                         <h4 class="m_7">Menu</h4>
-                        <li><a href="#">Advanced Search</a></li>
+                        <li><a href="/Event/AdvancedSearch">Advanced Search</a></li>
                         <li><a href="/Event/Index">Add Event</a></li>
-                        <li><a href="#">About Us</a></li>
+                        <li><a href="/About/Index">About Us</a></li>
                         <li><a href="/Profile/Index">My Profile</a></li>
                     </ul>
                 </div>
