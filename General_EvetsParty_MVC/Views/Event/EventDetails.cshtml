@@ -1,0 +1,99 @@
+﻿@model General_EvetsParty_MVC.Models.EventDetailsViewModel
+
+@{
+    ViewBag.Title = "EventDetails";
+}
+
+<h2>EventDetails</h2>
+
+<fieldset>
+    <legend>EventDetailsViewModel</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Title)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Title)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.StartTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StartTime)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.EndTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EndTime)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Place)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Place)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Organizers)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Organizers)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ShortDescription)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ShortDescription)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Sponsors)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Sponsors)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IsCharitable)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IsCharitable)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IsFreeEntrance)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IsFreeEntrance)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Enter)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Enter)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MainPhoto)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MainPhoto)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

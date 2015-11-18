@@ -1,0 +1,76 @@
+﻿body {
+}
+
+article > div {
+    text-align: initial;
+}
+
+#btnAdd {
+    display:inline-block;
+    margin-left:10px;
+}
+
+#dAdd {
+    display:inline-block;
+    visibility:hidden;
+    margin-left: 5px;
+}
+
+#upNew {
+    display:inline-block;
+}
+
+#upGrid {
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+table {
+    visibility: visible;
+}
+
+tr th:first-child, tr td:first-child {
+    width:50px;
+}
+
+tr th:nth-child(2), tr td:nth-child(2) {
+    min-width:200px;
+    max-width:320px;
+}
+
+tr th:nth-child(3), tr td:nth-child(3) {
+    width:150px;
+}
+
+th {
+    background-color: #316EBB;
+    color: white;
+    border-color: white;
+    font-family: cursive;
+    font-weight: normal;
+    text-align: center;
+}
+
+td {
+    text-align: center;
+}
+
+article input[type="submit"] {
+    background-color: #316EBB;
+    color: white;
+    height:25px;
+    font-size:14px; 
+    font-family: cursive;
+}
+
+#dEdit {
+    display:none;
+}
+
+tr {
+    height:40px;
+}
+
+img {
+    height:30px;
+}

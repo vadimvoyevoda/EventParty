@@ -1,0 +1,113 @@
+﻿input[type="text"], 
+input[type="password"], 
+input[type="date"], 
+input[type="email"] {
+    height:22px;
+    width:220px;
+    font-size:14px;
+    text-align:center;
+    margin-left:10px;
+}
+
+td {
+    text-align:left;
+    height:30px;
+}
+
+table {
+    margin-left:auto;
+    margin-right:10px;
+}
+
+img {
+   height:230px;
+   width:230px;
+   padding-left:50px;
+}
+
+input[type="submit"] {
+    height:30px;
+}
+
+.signUpClass {
+    width:224px;
+    margin-left:10px;
+    border-radius: 2px;
+    background-color: rgb(113, 251, 86);
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border: 1px solid lightgray;
+}
+
+.signUpClass:hover {
+    background-color: rgb(241, 204, 39);
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);   
+}
+
+.cancelClass {
+    width:125px;
+    border-radius: 2px;
+    background-color: lightgray;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border: 1px solid lightgray;
+}
+
+.cancelClass:hover {
+    text-decoration:underline;
+    font-style:italic;   
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+.valid {
+    width:60px;
+}
+
+table {
+    box-shadow:0 0 10px gray;
+    border-radius: 4px;
+    background-color:#fdfcfd;    
+}
+
+tr td:first-child span {
+    margin-left:10px;
+}
+
+body {
+    background:url("../../Images/SignUpBack.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size:cover;
+    -o-background-size:cover;
+    background-size:cover;
+}
+
+header {
+    margin-top: -8px;
+    margin-bottom: 15px;
+    background-color: #316EBB;
+    height: 40px;
+    border-radius: 0px 0px 8px 8px;
+    box-shadow: 0 0 10px black;
+}
+
+header img {
+    width: auto;
+    height: 190px;
+    margin-top: -35px;
+    padding-left: 30px;
+    transform:rotate(-12deg);
+    }
+
+header span {
+    color:white;
+    margin-top: 10px;
+    position: absolute;
+    right: 40px;
+    font-family: cursive;
+    }
+
+input[type="submit"]:hover {
+    cursor:pointer;
+}

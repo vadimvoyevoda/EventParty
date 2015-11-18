@@ -1,0 +1,18 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section head{    
+    <link rel="stylesheet" type="text/css" href="/Content/ProfileInfoStyles/ProfileStyles.css" />   
+    @RenderSection("head", false)
+}
+
+
+<div id="profileMenu">
+    <a href="/Profile/Index"><input type="button" id="info" value="My Personal Info" /></a>
+    <a href="/Profile/Events"><input type="button" id="events" value="My Events" /></a>
+    <input type="button" id="subscibed" value="Subscribed Events" />
+    <a href="/Profile/Settings"><input type="button" id="settings" value="Settings" /></a>
+</div>
+
+@RenderBody()

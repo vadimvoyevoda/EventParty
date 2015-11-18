@@ -1,0 +1,57 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="EventsParty_WebApplication.Site" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="Styles/MasterStyles.css" />
+    <script src="/Scripts/jquery-2.1.4.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/Scripts/Menu.js"></script> 
+    <asp:ContentPlaceHolder ID="head" runat="server">        
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <header>
+            <asp:LinkButton ID="btnLogOff" runat="server" ToolTip="LogOff" OnClick="btnLogOff_Click">
+                <asp:Label runat="server" Id="lbLogOff" Text="LogOff"></asp:Label>
+                <asp:Image ID="iLogOff" runat="server" ImageUrl="/Images/logOff.png"/>          
+            </asp:LinkButton>
+            <asp:Label runat="server" ID="lbHeader" Text="Server Admin"></asp:Label>           
+        </header>
+        <aside>
+            <asp:Button ID="btnEvents" runat="server" Text="Events" ClientIDMode="Static"/>
+            <div id="dEvents">
+                <asp:Button ID="btnOffered" runat="server" Text="Published Events" />
+                <asp:Button ID="btnPiblished" runat="server" Text="Suspicious Events" />
+            </div>
+            <asp:Button ID="btnComments" runat="server" Text="Comments" ClientIDMode="Static"/>
+            <div id="dComments">
+                <asp:Button ID="btnWriten" runat="server" Text="Writtend Comments" />
+                <asp:Button ID="btnApproved" runat="server" Text="Approved Comments" />
+            </div>
+            <asp:Button ID="btnCustomers" runat="server" Text="Customers" ClientIDMode="Static"/>
+            <div id="dCustomers">
+                <asp:Button ID="btnCustomersList" runat="server" Text="Customers List" OnClick="btnCustomersList_Click"/>
+                <asp:Button ID="btnBanList" runat="server" Text="Ban List" OnClick="btnBanList_Click"/>
+                <asp:Button ID="btnDeleted" runat="server" Text="Deleted Customers List" OnClick="btnDeleted_Click"/>
+            </div>
+            <asp:Button ID="btnConfig" runat="server" Text="Configuration" ClientIDMode="Static"/>
+            <div id="dConfig">
+                <asp:Button ID="btnType" runat="server" Text="Events Types" OnClick="btnType_Click"/>
+                <asp:Button ID="btnCategory" runat="server" Text="Person Categories"  OnClick="btnCategory_Click"/>
+                <asp:Button ID="btnCity" runat="server" Text="Cities" OnClick="btnCity_Click"/>
+                <asp:Button ID="btnRating" runat="server" Text="Ratings" OnClick="btnRating_Click"/>
+                <asp:Button ID="btnPermission" runat="server" Text="Permissions" OnClick="btnPermission_Click"/>
+            </div>
+        </aside>
+        <article>            
+            <div>
+                <asp:ContentPlaceHolder ID="body" runat="server">                    
+                </asp:ContentPlaceHolder>
+            </div>
+        </article>
+    </form>
+</body>
+</html>

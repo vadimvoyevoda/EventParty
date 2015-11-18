@@ -1,0 +1,130 @@
+﻿@model General_EvetsParty_MVC.Models.EventCustomerEditModel
+
+@{
+    ViewBag.Title = "Settings";
+    Layout = "~/Views/Shared/_ProfileLayout.cshtml";
+}
+
+@section head{
+    <script>
+        $(document).ready(function () {
+            $("#profile").addClass("active");
+            $("#settings").css("background", "rgb(114, 208, 244)").css("color", "white");
+        });
+    </script>
+    <link rel="stylesheet" type="text/css" href="/Content/bootstrap-datepicker.min.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/ProfileInfoStyles/SettingsStyles.css" />
+}
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        
+        <legend>Profile Edit</legend>
+        @Html.HiddenFor(model => model.Id)
+         
+        <div>- Change Password -</div>
+        <div class="editor-label">
+            <label>New Password</label>
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Password, new { type = "password"})
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+        <br />
+        <div class="editor-label">
+            <label>Confirm Password</label>
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Confirm, new { type = "password"})
+            @Html.ValidationMessageFor(model => model.Confirm)
+        </div>
+        <br /><br />
+
+        <div>- Personal Info -</div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+        <br />
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LastName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LastName)
+            @Html.ValidationMessageFor(model => model.LastName)
+        </div>        
+        <br />
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Birthday)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Birthday)
+            @Html.ValidationMessageFor(model => model.Birthday)
+        </div>
+        <script>
+            $(document).ready(function () {
+                $("#Birthday").datepicker(
+                    {
+                        format: 'dd.mm.yyyy',
+                        startDate: new Date("01-01-1940"),
+                        endDate: "-3y"
+                    });
+            });
+        </script>
+        <br /><br />
+
+        <div>- Contacts -</div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Mobile)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Mobile, new { maxLength = 13 })
+            @Html.ValidationMessageFor(model => model.Mobile)
+        </div>
+        <br />
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Email)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+        <br />
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Country)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Country)
+            @Html.ValidationMessageFor(model => model.Country)
+        </div>
+        <br />
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Address)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Address)
+            @Html.ValidationMessageFor(model => model.Address)
+        </div>
+        <br /><br />
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ShowContacts)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.ShowContacts, new List<SelectListItem> { new SelectListItem { Text = "Hide", Value = "false" }, new SelectListItem { Text = "Show", Value = "true" } })
+            @Html.ValidationMessageFor(model => model.ShowContacts)
+        </div>
+        <br /><br />
+
+        <p class="editor-label">
+            @Html.ActionLink("Back to ProfileInfo", "Index")
+        </p>
+        <p class="editor-field">
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}

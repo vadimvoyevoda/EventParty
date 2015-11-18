@@ -1,0 +1,78 @@
+﻿table {
+    margin-left: 2%;
+    width: 96%;  
+    top: 60px;
+    position: absolute;
+}
+
+th {
+    background-color: #316EBB;
+    color: white;
+    border-color: white;
+    font-family: cursive;
+    font-weight: normal;
+}
+
+article input[type="submit"], article input[type="text"] {
+    float: right;
+    width: 25%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+article input[type="submit"] {
+    width: 25px;
+    margin-right: 2%;
+    margin-left: 5px;
+    background-color: #C6DBF5;
+}
+
+.btnSearchClass {
+    background: url("../../Images/search.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position-x: 2px;
+}
+
+article div> span, select {
+    float: left;   
+    font-size: 14px;
+    font-family: cursive;
+    color: black;
+    margin-left: 5px;
+    margin-top: 1%;
+}
+
+article div> div> span {
+    float: right;
+    margin-right: 15px;
+    margin-top: 1%;
+    line-height: 22px;
+    font-size: 14px;
+    font-style: italic;
+    color: gray;
+}
+
+#body_lbRatings {
+    margin-left: 2%;
+}
+
+a {
+    text-decoration: initial;
+    color: blue;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+td img {
+    height: 50px;
+    max-width: 100px;
+    border: 1px solid blue;
+    vertical-align: middle;
+}
+
+article div > span {
+    padding-top: 1px;
+}

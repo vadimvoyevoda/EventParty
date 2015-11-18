@@ -1,0 +1,25 @@
+﻿.editor-label, .editor-field {
+    display: inline-block;
+}
+
+.editor-label{
+    width:150px;
+}
+
+.editor-field input, .editor-field select{
+    width:200px;
+    padding-left:5px;
+}
+
+#profileMenu, fieldset{
+    display: inline-table;
+}
+
+form{
+    display: inline-table;
+    vertical-align: top;
+}
+
+p {
+    display: inline-block;
+}

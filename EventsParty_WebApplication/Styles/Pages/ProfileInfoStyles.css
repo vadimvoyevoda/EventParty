@@ -1,0 +1,105 @@
+﻿body {
+}
+
+img {
+    max-height: 250px;
+    max-width: 400px;
+    float: left;
+}
+
+span {
+    display: inline-block;
+}
+
+span:nth-child(odd) {
+    color: black;
+    width: 150px;
+}
+
+div {
+    text-align:left;
+    margin-bottom:3px;
+}
+
+article > div {
+    margin-top:1%;
+    margin-left:10px;
+}
+
+select {
+    font-size:14px;
+    width:100px;
+}
+
+.saveClass {
+    width: 100px;
+    height: 30px;
+    border-radius: 2px;
+    background-color: rgb(113, 251, 86);
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border: 1px solid lightgray;
+    cursor:pointer;
+}
+
+.saveClass:hover {
+    background-color: rgb(241, 204, 39);
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);  
+}
+
+.banClass {
+    width: 200px;
+    height: 30px;
+    border-radius: 2px;
+    background-color: orange;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border: 1px solid lightgray;
+    cursor:pointer;
+}
+
+.banClass:hover {
+    background-color: red;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);  
+}
+
+.delClass {
+    width: 200px;
+    height: 30px;
+    border-radius: 2px;
+    background-color: red;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border: 1px solid lightgray;
+    cursor:pointer;
+}
+
+.delClass:hover {
+    background-color: darkred;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);  
+}
+
+.disableClass {
+    width: 200px;
+    height: 30px;
+    border-radius: 2px;
+    background-color: gray;
+    color: lightGray;
+    font-size: 14px;
+    font-weight: bold;
+    border: 1px solid lightgray;
+}
+
+.backClass {
+    width: 200px;
+    height: 30px;
+    border-radius: 2px;
+    background-color: blue;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border: 1px solid lightgray;
+}

@@ -1,0 +1,7 @@
+﻿@model System.DateTime
+
+@{
+    ViewBag.Title = "DateTime";
+}
+
+@Html.TextBox("birth",String.Format("{0:dd-MM-yyyy}",Model.Date))

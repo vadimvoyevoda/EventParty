@@ -1,0 +1,30 @@
+﻿.wClass {
+    width: 200px;
+}
+
+#searchMenu {
+    background-color: rgba(114, 208, 244, 0.29);
+    width: 260px;
+    padding-left: 10px;
+    padding-bottom: 10px;    
+    margin-left:10px;
+}
+.foundEvents {
+    width:80%;
+}
+
+.foundEvents, #searchMenu {    
+    display: inline-table;
+}
+
+#searchText, #country, #region, #city, #filteredSearch {
+    width:235px;
+}
+
+#searchMenu div {
+    margin-top:10px;
+}
+
+label {
+    font-weight:normal;
+}

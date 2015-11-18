@@ -1,0 +1,54 @@
+﻿#profileMenu, .pageContent, .myEventsClass {
+    display: inline-table;
+    vertical-align: top;
+}
+
+.pageContent {
+    width: 100%;
+}
+
+.myEventsClass {
+    width: 75%;
+}
+
+.col-md-4 {
+    margin-top:10px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.pageContent .col-md-4  {
+    float:none;
+}
+
+.live {
+    word-wrap:break-word;
+    width: 100%;
+}
+
+li.room {
+    width: 100%;
+}
+
+.type, .time {
+    width: 50%;
+    display:inline-block;    
+}
+
+.type {
+    text-align:right;
+    padding-right:10px;
+}
+
+.time {
+    text-align:left;
+    padding-left:10px;
+}
+
+.shortDesc {
+    width: 100%;
+    background-color: #00BFF0;
+    word-wrap: break-word;
+    color: white;
+    padding-left:10px;
+}

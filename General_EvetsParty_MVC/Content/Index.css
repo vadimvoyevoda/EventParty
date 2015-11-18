@@ -1,0 +1,35 @@
+﻿input {
+    width: 35%;
+    height: 40px;
+    margin-left:1%;
+    margin-top:20px;
+    padding-left:10px;
+}
+
+    input[type="submit"] {
+        width: 130px;
+        color:white;
+        font-weight:bold;
+        background-color: rgb(203, 39, 75);
+        border-radius: 5px;
+    }
+
+    input[type="submit"]:hover {
+        background-color: rgb(255, 106, 0);
+    }
+
+.search {
+    margin-top: 60px;
+    height:80px;
+    text-align: center;
+    background-color: #72D0F4;
+}
+
+body > div.main > div:nth-child(1) > div.row.content-top > div.col-md-5 > img{
+    width:60%;
+    margin-left:15%;
+}
+
+body > div.main > div:nth-child(1) > div.row.content-top > div.col-md-7.content_left_text{
+    font-family:cursive;
+}

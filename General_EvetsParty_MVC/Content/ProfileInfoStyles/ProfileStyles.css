@@ -1,0 +1,16 @@
+﻿#profileMenu input[type="button"] {
+    display: block;
+    width: 250px;
+    height: 40px;
+    color: blue;
+    background-color: transparent;
+    border: none;
+    text-align: left;
+}
+
+#profileMenu input[type="button"]:hover
+{
+    background-color: #72D0F4;
+    color: white;
+}
+

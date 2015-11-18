@@ -1,0 +1,210 @@
+﻿@model IEnumerable<DataModel.EventModel>
+
+@{
+    ViewBag.Title = "AdvancedSearch";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section head{
+    <link rel="stylesheet" type="text/css" href="/Content/ProfileInfoStyles/MyEventsStyles.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/bootstrap-datetimepicker.min.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/AdvancedSearch/SearchStyles.css" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#advancedSearch").addClass("active");
+
+            $("#filteredSearch").click(function () {
+                var seltypes = new Array();
+                var selcategories = new Array();
+
+                $(".cbType:checked").each(function() {
+                    seltypes.push($(this).val());
+                });
+                $(".cbCategory:checked").each(function() {
+                    selcategories.push($(this).val());
+                });
+
+                $.ajax({                   
+                    url: "/Event/AdvancedSearch",
+                    type: "POST",
+                    data: JSON.stringify({
+                        Text: $("#searchText").val(), OnlyInTitles: $('#onlyTitles').is(":checked"), Country: $("#country").val(),
+                        Region: $("#region").val(), City: $("#city").val(), IsChariteble: $('#charitable').is(":checked"),
+                        IsFree: $('#free').is(":checked"), ToTime: $("#endTime").val(), FromTime: $("#startTime").val(), Filter: true,
+                        Types: seltypes, Categories: selcategories
+                    }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        $(".pageContent").html(data);
+                    },
+                    error: function (data) {
+                        $(".pageContent").html(data.responseText);
+                    }
+                })
+            });
+        });
+
+        $(function () {
+            $("#city").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Event/LoadCities",
+                        data: { term: request.term, region : $("#region").val() },
+                        dataType: "json",
+                        type: "POST",
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.name,
+                                    value: item.name
+                                }
+                            }))
+                        }
+                    });
+                },
+                select: function (event, ui) {
+                    $(this).blur();
+                }
+            });
+        });
+
+        $(function () {
+            $("#region").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Event/LoadRegionsTerm",
+                        data: { term: request.term, country : $("#country").val() },
+                        dataType: "json",
+                        type: "POST",
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.name,
+                                    value: item.name
+                                }
+                            }))
+                        }
+                    });
+                },
+                select: function (event, ui) {
+                    $("#city").prop('disabled', false);
+                    $(this).blur();
+                },
+            });
+        });
+
+
+        $(function () {
+            $("#country").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Event/LoadCountries",
+                        data: { term: request.term },
+                        dataType: "json",
+                        type: "POST",
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.name,
+                                    value: item.name
+                                }
+                            }))
+                        }
+                    });
+                },
+                select: function (event, ui) {
+                    $("#region").prop('disabled', false);
+                    $(this).blur();
+                },
+            });
+        });
+
+
+    </script>
+}
+
+<div id="searchMenu">
+    <div><input type="text" id="searchText" placeholder="Search text" /></div>
+    <input type="checkbox" id="onlyTitles" checked />
+    <label for="onlyTitles"> search only in titles</label>
+    <br />
+    <span>From: </span>
+    <div class='input-group date wClass' id='fromTime'>
+        <input type="text" id="startTime">
+        <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+    </div>
+    <span>To: </span>
+
+    <div class='input-group date wClass' id='toTime'>
+        <input type="text" id="endTime">
+        <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+    </div>
+    <script>
+        $(function () {
+            $('#fromTime').datetimepicker({
+                locale: 'ru'
+            });
+            $('#toTime').datetimepicker({
+                locale: 'ru',
+                useCurrent: false
+            });
+
+            $('#fromTime').on("dp.change", function (e) {
+                $('#toTime').data("DateTimePicker").minDate(e.date);
+            });
+            $('#toTime').on("dp.change", function (e) {
+                $('#fromTime').data("DateTimePicker").maxDate(e.date);
+            });
+        });
+    </script>
+    <div><input type="text" id="country" placeholder="choose Country..." /></div>
+    <div>
+        <input type="text" id="region" placeholder="choose Region..." disabled />
+    </div>
+    <div>
+        <input type="text" id="city" placeholder="choose City..." disabled />
+    </div>
+    <br />
+    <span>Choose Event Type</span>
+    <div id="types">
+        @foreach (var type in ViewBag.Types)
+        {
+            <div>
+                <input type="checkbox" id="@type" class="cbType" value="@type" />
+                <label for="@type">@type</label>
+            </div>
+        }
+    </div>
+    <br />
+    <span>Choose Person Category</span>
+    <div id="categories">
+        @foreach (var cat in ViewBag.Categories)
+        {
+            <div>
+                <input type="checkbox" id="@cat" class="cbCategory" value="@cat" />
+                <label for="@cat">@cat</label>
+            </div>
+        }
+    </div>
+    <br />
+    <span>Adding</span>
+    <div>
+        <input type="checkbox" id="charitable" />
+        <label for="charitable">charitable</label>
+    </div>
+    <div>
+        <input type="checkbox" id="free" />
+        <label for="free">free entrance</label>
+    </div>
+    <input type="submit" id="filteredSearch" value="Search" />
+</div>
+<div class="foundEvents">
+    <div class="pageContent">
+        @Html.DisplayForModel()
+    </div>
+</div>

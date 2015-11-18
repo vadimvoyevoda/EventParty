@@ -1,0 +1,94 @@
+﻿@model IEnumerable<DataModel.EventModel>
+
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section head {
+    <link rel="stylesheet" href="/Content/Index.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/bootstrap-datepicker.min.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/ProfileInfoStyles/MyEventsStyles.css" />   
+
+    <script>
+        $(document).ready(function () {
+            $('#home').addClass("active");
+            $('#tbRegion').on('focusin', function () {
+                this.value = '';
+            });
+            $('#btnSearch').click(function () {
+                from = $("#tbDate").val().split("/");
+                newDate = parseInt(from[0]) + 1;
+                toDate = newDate + "/" + from[1] + "/" + from[2];
+
+               var url = '@Url.Action("AdvancedSearch", "Event", new {city = "__city",  fromTime = "__time", toTime = "__toTime"})';
+                window.location.href = url.replace('__time', $("#tbDate").val()).replace('__toTime', toDate).replace('__city', $("#city").val()).replace("&amp;", "&").replace("&amp;", "&");
+            });
+        });
+       
+        $(function () {
+            $("#tbRegion").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Home/LoadCities",
+                        data: {term : request.term },
+                        dataType: "json",
+                        type: "POST",
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.fullname,
+                                    value: item.fullname,
+                                    name: item.name
+                                }
+                            }))
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            alert('Error occured while autocomplete');
+                        }
+                    });
+                },
+                select: function (event, ui) {
+                    $("#city").val(ui.item.name);
+                    $(this).blur();
+                },
+                minLength: 1
+            });
+        });
+    </script>
+}
+
+<div class="container">
+    @Html.Hidden("city","")
+    <!-- start content-top -->
+    <div class="search">
+        <input id="tbDate" placeholder="Date" />   
+        <input id="tbRegion" placeholder="City" />
+        <input type="submit" id="btnSearch" value="Search" />
+    </div> 
+    <script type="text/javascript">
+        $(function () {
+            $('#tbDate').datepicker({
+                format: 'dd/mm/yyyy'              
+            });
+        });
+        </script>
+    
+    <div class="row content-top">
+        <div class="col-md-5">
+            <img src="/images/logo.png" class="img-responsive" alt="" />
+        </div>
+        <div class="col-md-7 content_left_text">
+            <h3>Events Party Project</h3>
+            <h5>website for those who are tired of sitting at home</h5>
+        </div>
+    </div>
+</div>
+
+<!-- end content-top -->
+<div class="container">
+    <div class="pageContent"> 
+        @Html.DisplayForModel()
+        <div class="clear"></div>
+    </div>
+</div>

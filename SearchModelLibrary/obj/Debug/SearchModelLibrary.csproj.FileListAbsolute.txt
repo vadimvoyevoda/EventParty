@@ -1,0 +1,9 @@
+F:\Курсак\EventsPartyProject\SearchModelLibrary\bin\Debug\SearchModelLibrary.dll
+F:\Курсак\EventsPartyProject\SearchModelLibrary\bin\Debug\SearchModelLibrary.pdb
+F:\Курсак\EventsPartyProject\SearchModelLibrary\obj\Debug\SearchModelLibrary.csprojResolveAssemblyReference.cache
+F:\Курсак\EventsPartyProject\SearchModelLibrary\obj\Debug\SearchModelLibrary.dll
+F:\Курсак\EventsPartyProject\SearchModelLibrary\obj\Debug\SearchModelLibrary.pdb
+I:\Курсак\EventsPartyProject\SearchModelLibrary\bin\Debug\SearchModelLibrary.dll
+I:\Курсак\EventsPartyProject\SearchModelLibrary\bin\Debug\SearchModelLibrary.pdb
+I:\Курсак\EventsPartyProject\SearchModelLibrary\obj\Debug\SearchModelLibrary.dll
+I:\Курсак\EventsPartyProject\SearchModelLibrary\obj\Debug\SearchModelLibrary.pdb

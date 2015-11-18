@@ -1,0 +1,23 @@
+﻿@model IEnumerable<DataModel.EventModel>
+
+@{
+    ViewBag.Title = "Events";
+    Layout = "~/Views/Shared/_ProfileLayout.cshtml";
+}
+
+@section head{
+    <link rel="stylesheet" type="text/css" href="/Content/ProfileInfoStyles/MyEventsStyles.css" />   
+
+    <script type="text/javascript">
+        $(document).ready(function () {           
+            $("#profile").addClass("active");
+            $("#events").css("background", "rgb(114, 208, 244)").css("color", "white");
+        });
+        </script>
+    }
+
+<div class="myEventsClass">
+    <div class="pageContent">
+        @Html.DisplayForModel()
+    </div>
+</div>

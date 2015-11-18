@@ -1,0 +1,5 @@
+C:\Users\Вадим\Desktop\MyVoiceChat\EncryptPass\bin\Release\EncryptPass.dll
+C:\Users\Вадим\Desktop\MyVoiceChat\EncryptPass\bin\Release\EncryptPass.pdb
+C:\Users\Вадим\Desktop\MyVoiceChat\EncryptPass\obj\Release\EncryptLibrary.csprojResolveAssemblyReference.cache
+C:\Users\Вадим\Desktop\MyVoiceChat\EncryptPass\obj\Release\EncryptPass.dll
+C:\Users\Вадим\Desktop\MyVoiceChat\EncryptPass\obj\Release\EncryptPass.pdb

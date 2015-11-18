@@ -1,0 +1,320 @@
+﻿@model General_EvetsParty_MVC.Models.EventCreateViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section head{
+    <link rel="stylesheet" type="text/css" href="/Content/AddEventStyles/AddEventStyles.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/bootstrap-datetimepicker.min.css" />
+    <script>
+        $(document).ready(function () {
+            $('#addEvent').addClass("active");
+            $("#ddlCountries")[0].selectedIndex = 0;
+        });       
+
+        $(function () {
+            $("#City").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "LoadCities",
+                        datatype: "json",
+                        data: {
+                            term: request.term,
+                            region: $("#ddlRegions option:selected").text()
+                        },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.name,
+                                    value: item.name,
+                                    id : item.value
+                                }
+                            }))
+                        }
+                    });
+                },
+                select: function (event, ui) {
+                    $("#selectCity").val(ui.item.id);
+                }
+            });
+        });
+
+        function LoadRegionsForCountry() {
+            var mySelect = $('#ddlRegions');
+            mySelect.empty();
+            mySelect.append($('<option></option>').val("").html("...Choose Region..."));
+
+            if ($("#ddlCountries").val() != "") {
+                $.ajax({
+                    url: "/Event/LoadRegions",
+                    type: "POST",
+                    data: { CountryId: $("#ddlCountries").val() },
+                    dataType: "json",
+                    success: function (response) {
+                        $.each(response, function (idx, elem) {
+                            mySelect.append(
+                                $('<option></option>').val(elem.Value).html(elem.Text)
+                            );
+                        });
+                    },
+                    error: function (er) {
+                        alert("Regions Loading error");
+                    }
+                });
+            }
+            else {
+                $("#City").prop('disabled', true);
+            }
+        }
+
+        function SetRegion() {
+            if ($("#ddlRegions").val() != "") {
+                $("#City").prop('disabled', false);               
+            }
+            else {
+                $("#City").prop('disabled', true);
+            }
+        }
+
+
+        //function PreviewMainImage() {
+        //    var oFReader = new FileReader();
+        //    oFReader.readAsDataURL($("#changePhotoBtn")[0].files[0]);
+
+        //    oFReader.onload = function (oFREvent) {
+        //        var resImg = $("#iMainPhoto");
+        //        if (resImg.length == 0) {
+        //            $('<img/>').attr({
+        //                id: 'iMainPhoto',
+        //                src: oFREvent.target.result,
+        //                title: "selectedPhoto"
+        //            }).appendTo('#eventMainPhoto');
+        //        }
+        //        else {
+        //            resImg[0].src = oFREvent.target.result;
+        //        }
+        //    };
+        //};
+
+    </script>
+}
+ 
+@using (Html.BeginForm())
+{    
+    @Html.ValidationSummary(true)
+          
+    <fieldset>     
+        <legend>New Event Adding</legend>   
+        <div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Title, new { @class = "required" })
+            </div>
+            <div class="editor-field longField">
+                @Html.TextBoxFor(model => model.Title, new { maxlength = 100, placeholder = "Enter Your event title" })
+                @Html.ValidationMessageFor(model => model.Title)
+            </div>
+        </div>
+        <div class="inline ">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.StartTime, new { @class = "required" })
+            </div>
+            <div class="editor-field">
+                <div>
+                    <div class='input-group date' id='datetimepicker1'>
+                        @Html.TextBoxFor(c => c.StartTime, new { type = "text", @class = "form-control" })
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(model => model.StartTime)
+            </div>
+        </div>
+        <div class="inline ">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.EndTime)
+            </div>
+            <div class="editor-field">
+                <div>
+                    <div class='input-group date' id='datetimepicker2'>
+                        @Html.TextBoxFor(c => c.StartTime, new { type = "text", @class = "form-control" })
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(model => model.EndTime)
+            </div>
+        </div>
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker({
+                    locale: 'ru',
+                    minDate: moment()                    
+                });
+                $('#datetimepicker2').datetimepicker({
+                    locale: 'ru',
+                    minDate: moment(),
+                    useCurrent: false
+                });
+
+                $('#datetimepicker1').on("dp.change", function (e) {
+                    $('#datetimepicker2').data("DateTimePicker").minDate(e.date);
+                });
+                $('#datetimepicker2').on("dp.change", function (e) {
+                    $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);
+                });
+            });
+        </script>
+        <br />
+        <div class="inline ">
+            <div class="editor-label">
+                <label class = "required">Event Type</label>
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.SelectedTypeId, Model.EventTypes, "...Choose Event type...", null)
+                @Html.ValidationMessageFor(model => model.SelectedTypeId)
+            </div>
+        </div>
+        <div class="inline ">
+            <div class="editor-label">
+                <label>Person Category</label>
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.SelectedPersonsCategoryId, Model.EventPersonCategories)
+                @Html.ValidationMessageFor(model => model.SelectedPersonsCategoryId)
+            </div>
+        </div>
+        <br />
+        <div class="inline ">
+            <div class="editor-label">
+                <label class = "required">Country</label>
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.SelectedCountryId, Model.Countries, "...Choose Country...", new { id = "ddlCountries", onchange = "LoadRegionsForCountry()" })
+            </div>
+        </div>
+        <div class="inline ">
+            <div class="editor-label">
+                <label class = "required">Region</label>
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.SelectedRegionId, Model.Regions, "...Choose Region...", new { id = "ddlRegions", onchange = "SetRegion()" })
+                @Html.ValidationMessageFor(model => model.SelectedRegionId)
+            </div>
+        </div>
+        <br />
+        <div class="inline">
+            <div class="editor-label">
+                <label class="required">Choose city</label>
+            </div>
+            <div class="editor-field longField">
+                <input type="text" id="City" disabled placeholder = "Event city holding" />
+                @Html.HiddenFor(model => model.City, new { id = "selectCity" })
+                @Html.ValidationMessageFor(model => model.City)             
+            </div>
+        </div>
+        <div class="inline">
+            <div class="editor-label inline">
+                @Html.LabelFor(model => model.IsCharitable)
+            </div>
+            <div class="editor-field inline">
+                @Html.EditorFor(model => model.IsCharitable)
+                @Html.ValidationMessageFor(model => model.IsCharitable)
+            </div>
+        </div>
+        <div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Place, new { @class = "required" })
+            </div>
+            <div class="editor-field longField">
+                @Html.TextBoxFor(model => model.Place, new { maxlength = 256, placeholder = "Where will be Your event" })
+                @Html.ValidationMessageFor(model => model.Place)
+            </div>
+        </div>
+        <div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Organizers, new { @class = "required" })
+            </div>
+            <div class="editor-field longField">
+                @Html.TextBoxFor(model => model.Organizers, new { placeholder = "Who will organize event" })
+                @Html.ValidationMessageFor(model => model.Organizers)             
+            </div>
+        </div>
+        @*<div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.MainPhoto)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.MainPhoto, new { type = "file", id = "changePhotoBtn", name = "photo", accept = "image/*", onchange = "PreviewMainImage()" })
+                @Html.ValidationMessageFor(model => model.MainPhoto)
+            </div>
+        </div>
+        <div id="eventMainPhoto">
+        </div>
+        <div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Photos)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.Photos, new { type = "file", id = "choosePhotos", name = "photo", accept = "image/*", onchange = "PreviewImages()", multiple = "multiple" })
+                @Html.ValidationMessageFor(model => model.MainPhoto)
+            </div>
+        </div>*@
+        <div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ShortDescription, new { @class = "required" })
+            </div>
+            <div class="editor-field longField">
+                @Html.TextBoxFor(model => model.ShortDescription, new { maxlength = 100, placeholder = "Short info about event" })
+                @Html.ValidationMessageFor(model => model.ShortDescription)
+            </div>
+        </div>
+        <div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Description, new { @class = "required" })
+            </div>
+            <div class="editor-field longField">
+                @Html.TextAreaFor(model => model.Description, new { rows = 5, placeholder = "Information about event" })
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+        </div>
+        <div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Sponsors)
+            </div>
+            <div class="editor-field longField">
+                @Html.TextBoxFor(model => model.Sponsors, new { placeholder = "Sponsors information" })
+                @Html.ValidationMessageFor(model => model.Sponsors)
+            </div>
+        </div>
+        <div class="inline">
+            <div class="editor-label inline">
+                @Html.LabelFor(model => model.IsFreeEntrance)
+            </div>
+            <div class="editor-field inline">
+                @Html.EditorFor(model => model.IsFreeEntrance)
+                @Html.ValidationMessageFor(model => model.IsFreeEntrance)
+            </div>
+        </div>
+        <div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Enter)
+            </div>
+            <div class="editor-field longField">
+                @Html.TextBoxFor(model => model.Enter, new { placeholder = "Information about entrance on event" })
+                @Html.ValidationMessageFor(model => model.Enter)
+            </div>
+        </div>
+        <div class="inline">
+            @Html.ActionLink("Back", "Index", "Home")
+        </div>
+        <div class="inline longField Create">
+            <input type="submit" id="Create" value="Publish Event" />
+        </div>
+    </fieldset>
+}
+
+
+

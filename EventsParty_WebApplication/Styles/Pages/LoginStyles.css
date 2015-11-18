@@ -1,0 +1,130 @@
+﻿span {
+    font-size: 16px;
+    color: gray;
+    display: inline-block;
+    margin-top:12px;  
+}
+
+span, input[type="text"], input[type="password"] {
+    width: 250px;
+    text-align: center;
+}
+
+input[type="text"], input[type="password"]{
+    color:black;
+    height:25px;
+    border-radius:4px;     
+    border:1px inset lightgray;
+    margin-top:3px;
+}
+
+input[type="text"] {
+    font-size: 14px;
+}
+
+input[type="password"] {
+    font-size: 22px;
+}
+
+input[type="checkbox"] {
+    margin-top:5px;
+    margin-bottom:10px;
+    float: left;
+    margin-left:15px;
+}
+
+label {    
+    font-size:14px;
+    float: left;
+    margin-top: 4px;
+}
+
+.joinClass {width: 180px;
+    height: 30px;
+    border-radius: 2px;
+    background-color: rgb(113, 251, 86);
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border: 1px solid lightgray;
+    cursor:pointer;
+}
+
+.signUpClass {
+    width: 70px;
+    height: 30px;
+    background-color: transparent;
+    color: gray;
+    font-size: 14px;
+    font-weight: bold;
+    border: 0px;
+    cursor:pointer;
+}
+
+.joinClass:hover {
+    background-color: rgb(241, 204, 39);
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);  
+}
+
+.signUpClass:hover {
+    text-decoration:underline;
+    font-style:italic;   
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);    
+}
+
+.signForm {
+    width: 280px;
+    height: 290px;
+    text-align: center;
+    box-shadow:0 0 10px gray;
+    border-radius: 10px;
+    background-color:#fdfcfd;
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-right: -50%;
+    transform: translate(-50%,-50%);
+}
+
+img {
+    width:100px;
+    height:100px;
+    margin-bottom:-10px;
+}
+
+body {
+    background:url("../../Images/LoginBack.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size:cover;
+    -o-background-size:cover;
+    background-size:cover;
+}
+
+header {
+    margin-top: -8px;
+    margin-bottom: 15px;
+    background-color: #316EBB;
+    height: 40px;
+    border-radius: 0px 0px 8px 8px;
+    box-shadow: 0 0 10px black;
+}
+
+header span {
+    color:white;
+    margin-top: 10px;
+    position: absolute;
+    right: 40px;
+    font-family: cursive;
+    width: auto;
+    }
+
+#lbMsg {
+    color: red;
+    font-style: italic;
+    font-size: 12px;
+    width: 145px;
+    height: 15px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}

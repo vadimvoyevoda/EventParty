@@ -1,0 +1,65 @@
+﻿fieldset {
+    display: inline;
+}
+
+img {
+    max-height: 250px;
+    max-width: 400px;
+    vertical-align: top;
+}
+
+.display-field, .display-label {
+    display: inline-block;
+    text-align:left;
+    margin-bottom:3px;
+}
+
+.display-field {
+    color: blue;
+}
+
+.display-label {
+    color: black;
+    width: 150px;
+}
+
+#profileMenu, #userInfo, #img_info {
+    display: inline-table;
+    margin-left: 10px;
+}
+
+#img_info {
+    background-color:white;    
+    min-width:600px;
+    text-align:center;
+}
+
+#userInfo {
+    text-align: left;
+}
+
+.infoTitle {
+   text-align: center;
+   margin-top:10px;
+}
+
+#changePhotoBtn, #savePhotoBtn {
+    display: inline-block;
+}
+
+#changePhotoBtn {    
+    width: 280px;
+    font-family: cursive;
+}
+
+#BtnPhoto {
+    margin-left: auto;
+    margin-right: auto;    
+    margin-top: 4px;
+}
+
+.bann {
+    font-size:200%;
+    color:red;
+    text-decoration: underline;
+}

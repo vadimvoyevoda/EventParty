@@ -1,0 +1,145 @@
+﻿@model DataModel.EventCustomer
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_ProfileLayout.cshtml";
+}
+
+@section head{
+    <link rel="stylesheet" type="text/css" href="/Content/ProfileInfoStyles/ProfileInfoStyles.css" />    
+    <script type="text/javascript">
+        $(document).ready(function () {           
+            $("#profile").addClass("active");
+            $("#info").css("background", "rgb(114, 208, 244)").css("color", "white");
+            
+            $("#savePhotoBtn").click(function () {
+                var data = new FormData();                
+                var files = $("#changePhotoBtn").get(0).files; 
+                if (files.length > 0) {
+                    data.append("HelpSectionImages", files[0]);                    
+                }
+                $.ajax({
+                    url: "/Profile/ChangePhoto",
+                    type: "POST",
+                    processData: false,
+                    contentType: false,
+                    data: data,
+                    success: function (response) {
+                        if (response == "True") {
+                            $('#ProfilePhoto')[0].src = $imgContent;
+                        }
+                    },
+                    error: function (er) {
+                        alert(er);
+                    }
+                });
+                return false;
+            });
+        });
+
+        function PreviewMainImage() {
+            var freader = new FileReader();
+            freader.readAsDataURL($("#changePhotoBtn")[0].files[0]);
+            freader.onload = function (oFREvent) {
+                $imgContent = oFREvent.target.result;
+            }
+        }
+        
+    </script>
+
+
+}
+
+<fieldset>   
+    <div id="img_info">
+        
+            @if (Model.IsBan)
+            {
+                <div class="bann">Banned</div>
+            }
+        <div id="imgSet">                       
+            <img id="ProfilePhoto" src="@Model.Photo"/>
+                <div id="BtnPhoto">
+                    <input type="file" id="changePhotoBtn" name="photo" accept="image/*" onchange="PreviewMainImage()"/>
+                    <input type="submit" id="savePhotoBtn" value="SavePhoto"/>
+                </div>
+        </div>
+        <div id="userInfo">
+            <div class="infoTitle">---- Personal Info ----</div>
+            <div>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Name):
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Name)
+                </div>
+            </div>
+            <div>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.LastName):
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.LastName)
+                </div>
+            </div>
+            <div>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Birthday):
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Birthday)
+                </div>
+            </div>
+            <div>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Country):
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Country)
+                </div>
+            </div>
+            <div>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Address):
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Address)
+                </div>
+            </div>   
+            <div class="infoTitle">---- Contacts ----</div>             
+            <div>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Mobile):
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Mobile)
+                </div>
+            </div>
+            <div>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Email):
+                </div>
+                <div class="display-field">
+                    @Html.DisplayTextFor(model => model.Email)
+                </div>
+            </div>   
+            <div class="infoTitle">---- Website statistics ----</div>  
+            <div>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Rating):
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Rating.Name)
+                </div>
+            </div>
+            <div>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Permissions):
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Permissions.Type)
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>
