@@ -1,14 +1,25 @@
+body {
+    background-color: #CAFBFF;
+}
+
 .info {
     cursor:pointer;
+}
+
+.main .container {
+    background-color: white;
 }
 
 .clear {
     clear: both;
 }
 
-html, body {
-    font-family: 'Open Sans', sans-serif;
+html {
     background: #F3F3F3;
+}
+
+html, body {
+    font-family: 'Open Sans', sans-serif;    
     font-size: 100%;
 }
 

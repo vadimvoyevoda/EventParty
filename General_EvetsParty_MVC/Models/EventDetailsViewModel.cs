@@ -12,7 +12,9 @@ namespace General_EvetsParty_MVC.Models
             [Required]
             public string Title { get; set; }
             [Required]
+            [UIHint("DateTimeLong")]
             public DateTime StartTime { get; set; }
+            [UIHint("DateTimeLong")]
             public DateTime? EndTime { get; set; }
             [Required]
             public EventType Type { get; set; }
@@ -36,5 +38,6 @@ namespace General_EvetsParty_MVC.Models
             public EventCity City { get; set; }
             public string MainPhoto { get; set; }
             public List<string> Photos { get; set; }
+            public EventCustomer Publisher { get; set; }
             }
 }

@@ -1,0 +1,98 @@
+﻿.title {
+    font-size:20pt;
+    color:white;
+    background-color:blue;
+    word-wrap: break-word;
+}
+
+.detailsmain {
+    width: 65vw;
+    margin-left: auto;
+    margin-right: auto;
+    background-color:white;
+    padding:15px;
+}
+
+.detailsmain> img {
+    display: block;
+    margin: auto;    
+    max-width: 100%;
+    max-height: 500px;
+}
+
+.first {
+    width:100%; 
+    white-space:nowrap;
+}
+
+.first> div { 
+    display:inline-block; 
+    vertical-align: top;
+    width:50%;
+}
+
+.time > div > span:first-child {
+    width: 60px;
+    display: inline-block;
+    font-size:14pt;
+}
+
+.time > div > span:nth-child(2) {
+    font-size:16pt;
+}
+
+.time {
+    text-align:left;
+    padding-left: 5vw;
+}
+
+.organizer {
+    padding-right: 5vw;
+}
+
+.orginfo {
+    width: 200px;
+    text-align: center;
+    margin-right: 0;
+    margin-left: auto;
+}
+
+.orginfo img {    
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+}
+
+.detailsmain > div > span:first-child {
+    font-size: 14pt;
+    color: blue;
+    width: 140px;
+    display: inline-block;
+}
+
+#charitable {
+    color:red;
+    font-size:16pt;
+}
+
+#free {
+    color:green;
+    font-size:16pt;
+}
+
+#typediv, #catdiv {
+    display:inline-block;
+    width:40%;    
+}
+
+#second {
+    background-color:rgb(114, 208, 244);
+    color:white;
+}
+
+
+
+.publsherlogin {
+    word-wrap:break-word;
+}
+

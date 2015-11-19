@@ -87,6 +87,7 @@ namespace General_EvetsParty_MVC.Controllers
                 ShortDescription = currentEvent.ShortDescription,
                 Sponsors = currentEvent.Sponsors,
                 IsCharitable = currentEvent.IsCharitable,
+                isFreeEntrance = currentEvent.IsFreeEntrance,
                 Enter = currentEvent.Enter,
                 Publisher = new EventCustomer { Login = userName },
                 City = new EventCity { Id = currentEvent.City}               
@@ -185,6 +186,8 @@ namespace General_EvetsParty_MVC.Controllers
             model.StartTime = current.StartTime;
             model.Title = current.Title;
             model.Type = current.Type;
+            model.Publisher = current.Publisher;
+            model.Publisher.Photo = new PhotoManager().GetImage(current.Publisher.Photo, Server.MapPath("~"), true);
             
             return View(model);
         }

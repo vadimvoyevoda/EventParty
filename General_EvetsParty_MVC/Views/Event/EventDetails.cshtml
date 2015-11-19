@@ -3,93 +3,79 @@
 @{
     ViewBag.Title = "EventDetails";
 }
+<link href="/Content/EventDetails/EventDetailsStyles.css" rel="stylesheet" />
 
-<fieldset>
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Title)
-    </div>
-    <div class="display-field">
+<div class="detailsmain">
+    
+    @if (Model.IsCharitable == true)
+    {
+        <span id="charitable">Charitable</span>
+    }
+    @if (Model.IsFreeEntrance == true)
+    {
+        <span id="free">Free Entrance</span>
+    }
+    <br />
+    <div class="title">
         @Html.DisplayFor(model => model.Title)
     </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.StartTime)
+    <div id="second">
+        <div id="typediv">
+            <span>Type: </span>
+            <span>@Html.DisplayFor(model => model.Type)</span>
+        </div>
+        <div id="catdiv">
+            <span>PersonCategory: </span>
+            <span>@Html.DisplayFor(model => model.PersonsCategory.Category)</span>
+        </div>
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.StartTime)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.EndTime)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.EndTime)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Place)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Place)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Organizers)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Organizers)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Description)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Description)
+    <br />
+    <img src="@Model.MainPhoto"/>
+    <div class="first">        
+        <div class="time">
+            <div>
+                <span>Start :</span>
+                <span>@Html.DisplayFor(model => model.StartTime, "DateTimeLong")</span>
+            </div>
+            @if (Model.EndTime != null)
+            {
+                <div>
+                    <span>End :</span>
+                    <span>@Html.DisplayFor(model => model.EndTime, "DateTimeLong")</span>
+                </div>
+            }
+        </div>
+        <div class="organizer">
+            <div class="orginfo">
+                <img src="@Model.Publisher.Photo" />
+                <div class="publsherlogin">@Model.Publisher.Login</div>
+            </div>
+        </div>
     </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ShortDescription)
+   
+    <div>
+        <span>Where: </span>
+        <span>@Html.DisplayFor(model => model.Place)</span>
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ShortDescription)
+    <br />
+    <div>
+        <span>About event: </span>
+        <span>@Html.DisplayFor(model => model.Description)</span>
     </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Sponsors)
+    <br />
+    <div>
+        <span>Organizers: </span>
+        <span>@Html.DisplayFor(model => model.Organizers)</span>
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Sponsors)
+    <br />
+    <div>
+        <span>Sponsors: </span>
+        <span>@Html.DisplayFor(model => model.Sponsors)</span>
     </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.IsCharitable)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.IsCharitable)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.IsFreeEntrance)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.IsFreeEntrance)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Enter)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Enter)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.MainPhoto)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.MainPhoto)
-    </div>
-</fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+    <br />
+    <div>
+        <span>Enter: </span>
+        <span>@Html.DisplayFor(model => model.Enter)</span>
+    </div>    
+ </div>
