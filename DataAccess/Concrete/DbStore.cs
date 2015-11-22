@@ -192,17 +192,11 @@ namespace DataAccess.Concrete
 
             if (searchModel.Types != null)
             {
-                foreach (var el in searchModel.Types)
-                {
-                    model = model.Where(e => e.Type.Type == el);
-                }
+                model = model.Where(e => searchModel.Types.Contains(e.Type.Type));
             }
             if (searchModel.Categories != null)
             {
-                foreach (var el in searchModel.Categories)
-                {
-                    model = model.Where(e => e.PersonsCategory.Category == el);
-                }
+                model = model.Where(e => searchModel.Categories.Contains(e.PersonsCategory.Category));             
             }
         }
     }

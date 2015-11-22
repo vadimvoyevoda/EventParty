@@ -174,9 +174,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\EditViewModel.cs" />
     <Compile Include="Models\EventDetailsViewModel.cs" />
     <Compile Include="Models\EventViewModel.cs" />
     <Compile Include="Models\EventCustomerEditModel.cs" />
+    <Compile Include="Models\IModel.cs" />
+    <Compile Include="Models\IWideModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -198,7 +201,9 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\DatePicker\jquery-ui.css" />
+    <Content Include="Content\EditEvent\EditEvent.css" />
     <Content Include="Content\EventDetails\EventDetailsStyles.css" />
+    <Content Include="Content\EventModel.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\Index.css" />
     <Content Include="Content\jquery-ui.css" />
@@ -481,6 +486,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ChangeModelLibrary\ChangeModelLibrary.csproj">
+      <Project>{7ed3b92d-f769-44ce-a5d8-e256bed26464}</Project>
+      <Name>ChangeModelLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">
       <Project>{84793d69-e15e-4dd8-afed-4b56e72d035e}</Project>
       <Name>DataAccess</Name>

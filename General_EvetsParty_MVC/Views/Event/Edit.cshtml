@@ -1,135 +1,244 @@
-﻿@model General_EvetsParty_MVC.Models.EventCreateViewModel
+﻿@model General_EvetsParty_MVC.Models.EditViewModel
 
 @{
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+@section head{
+    <link rel="stylesheet" type="text/css" href="/Content/AddEventStyles/AddEventStyles.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/bootstrap-datetimepicker.min.css" />
+    <link href="/Content/EditEvent/EditEvent.css" rel="stylesheet" />
+    <script>
+        $(document).ready(function () {
+            $("#changePhoto").click(function () {
+                var data = new FormData();
+                var files = $("#changePhotoBtn").get(0).files;
+                if (files.length > 0) {
+                    data.append("HelpSectionImages", files[0]);
+                }
+                $.ajax({
+                    url: '@Url.Action("ChangeMainPhoto",new {id = Model.Id})',
+                    type: "POST",
+                    processData: false,
+                    contentType: false,
+                    data: data,
+                    success: function (response) {
+                        alert("Photo changed");
+                    },
+                    error: function (er) {
+                        alert(er);
+                    }
+                });
+                return false;
+            });
+        });
 
-@using (Html.BeginForm()) {
+        function PreviewMainImage() {
+            var oFReader = new FileReader();
+            oFReader.readAsDataURL($("#changePhotoBtn")[0].files[0]);
+
+            oFReader.onload = function (oFREvent) {
+                var resImg = $("#iMainPhoto");
+                resImg[0].src = oFREvent.target.result;              
+            };
+        };
+        
+        //var resImg = $("#iMainPhoto");
+        //if (resImg.length == 0) {
+        //    $('<img/>').attr({
+        //        id: 'iMainPhoto',
+        //        src: oFREvent.target.result,
+        //        title: "Event Main Photo"
+        //    }).appendTo('#eventMainPhoto');
+        //}
+    </script>
+}
+ 
+@using (Html.BeginForm())
+{    
     @Html.ValidationSummary(true)
+          
+    <fieldset>     
+        <legend>Editing</legend>   
+        <div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Title, new { @class = "required" })
+            </div>
+            <div class="editor-field longField">
+                @Html.TextBoxFor(model => model.Title, new { maxlength = 100, placeholder = "Enter Your event title" })
+                @Html.ValidationMessageFor(model => model.Title)
+            </div>
+        </div>
+        <div class="inline ">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.StartTime, new { @class = "required" })
+            </div>
+            <div class="editor-field">
+                <div>
+                    <div class='input-group date' id='datetimepicker1'>
+                        @Html.TextBoxFor(c => c.StartTime, new { type = "text", @class = "form-control" })
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(model => model.StartTime)
+            </div>
+        </div>
+        <div class="inline ">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.EndTime)
+            </div>
+            <div class="editor-field">
+                <div>
+                    <div class='input-group date' id='datetimepicker2'>
+                        @Html.TextBoxFor(c => c.EndTime, new { type = "text", @class = "form-control" })
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(model => model.EndTime)
+            </div>
+        </div>
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker({
+                    locale: 'ru',
+                    minDate: moment()                    
+                });
+                $('#datetimepicker2').datetimepicker({
+                    locale: 'ru',
+                    minDate: moment(),
+                    useCurrent: false
+                });
 
-    <fieldset>
-        <legend>EventCreateViewModel</legend>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Title)
+                $('#datetimepicker1').on("dp.change", function (e) {
+                    $('#datetimepicker2').data("DateTimePicker").minDate(e.date);
+                });
+                $('#datetimepicker2').on("dp.change", function (e) {
+                    $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);
+                });
+            });
+        </script>
+        <br />
+        <div class="inline ">
+            <div class="editor-label">
+                <label class = "required">Event Type</label>
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.SelectedTypeId, Model.EventTypes)
+                @Html.ValidationMessageFor(model => model.SelectedTypeId)
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Title)
-            @Html.ValidationMessageFor(model => model.Title)
+        <div class="inline ">
+            <div class="editor-label">
+                <label>Person Category</label>
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.SelectedPersonsCategoryId, Model.EventPersonCategories)
+                @Html.ValidationMessageFor(model => model.SelectedPersonsCategoryId)
+            </div>
         </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.StartTime)
+        <br />    
+        <div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Place, new { @class = "required" })
+            </div>
+            <div class="editor-field longField">
+                @Html.TextBoxFor(model => model.Place, new { maxlength = 256, placeholder = "Where will be Your event" })
+                @Html.ValidationMessageFor(model => model.Place)
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.StartTime)
-            @Html.ValidationMessageFor(model => model.StartTime)
+        <div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Organizers, new { @class = "required" })
+            </div>
+            <div class="editor-field longField">
+                @Html.TextBoxFor(model => model.Organizers, new { placeholder = "Who will organize event" })
+                @Html.ValidationMessageFor(model => model.Organizers)             
+            </div>
         </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.EndTime)
+        
+        <div id="eventMainPhoto">
+            <div>
+            <div class="editor-label">
+                Change Main Photo
+            </div>
+            <div class="editor-field">
+                @Html.TextBox("image", null, new { type = "file", id = "changePhotoBtn", name = "photo", accept = "image/*", onchange = "PreviewMainImage()" })
+                <img src=@Url.Content(Model.MainPhoto) id="iMainPhoto"/>
+                <button id="changePhoto">SavePhoto</button>
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.EndTime)
-            @Html.ValidationMessageFor(model => model.EndTime)
         </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.SelectedTypeId)
+        @*
+        <div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Photos)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.Photos, new { type = "file", id = "choosePhotos", name = "photo", accept = "image/*", onchange = "PreviewImages()", multiple = "multiple" })
+                @Html.ValidationMessageFor(model => model.MainPhoto)
+            </div>
+        </div>*@
+        <div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ShortDescription, new { @class = "required" })
+            </div>
+            <div class="editor-field longField">
+                @Html.TextBoxFor(model => model.ShortDescription, new { maxlength = 100, placeholder = "Short info about event" })
+                @Html.ValidationMessageFor(model => model.ShortDescription)
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.SelectedTypeId)
-            @Html.ValidationMessageFor(model => model.SelectedTypeId)
+        <div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Description, new { @class = "required" })
+            </div>
+            <div class="editor-field longField">
+                @Html.TextAreaFor(model => model.Description, new { rows = 5, placeholder = "Information about event" })
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
         </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.SelectedPersonsCategoryId)
+        <div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Sponsors)
+            </div>
+            <div class="editor-field longField">
+                @Html.TextBoxFor(model => model.Sponsors, new { placeholder = "Sponsors information" })
+                @Html.ValidationMessageFor(model => model.Sponsors)
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.SelectedPersonsCategoryId)
-            @Html.ValidationMessageFor(model => model.SelectedPersonsCategoryId)
+        <div class="inline">
+            <div class="editor-label inline">
+                @Html.LabelFor(model => model.IsCharitable)
+            </div>
+            <div class="editor-field inline">
+                @Html.EditorFor(model => model.IsCharitable)
+                @Html.ValidationMessageFor(model => model.IsCharitable)
+            </div>
         </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Place)
+        <div class="inline">
+            <div class="editor-label inline">
+                @Html.LabelFor(model => model.IsFreeEntrance)
+            </div>
+            <div class="editor-field inline">
+                @Html.EditorFor(model => model.IsFreeEntrance)
+                @Html.ValidationMessageFor(model => model.IsFreeEntrance)
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Place)
-            @Html.ValidationMessageFor(model => model.Place)
+        <div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Enter)
+            </div>
+            <div class="editor-field longField">
+                @Html.TextBoxFor(model => model.Enter, new { placeholder = "Information about entrance on event" })
+                @Html.ValidationMessageFor(model => model.Enter)
+            </div>
         </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Organizers)
+        <div class="inline longField Create">
+            <input type="button" id="Del" value="Delete" onclick="if(confirm('Are you sure you want to Delete this event?')){location.href='@Url.Action("DeleteEvent", "Event", new { id = Model.Id })'}"/>
+            <input type="submit" id="Create" value="Save" />
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Organizers)
-            @Html.ValidationMessageFor(model => model.Organizers)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Description)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Description)
-            @Html.ValidationMessageFor(model => model.Description)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ShortDescription)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ShortDescription)
-            @Html.ValidationMessageFor(model => model.ShortDescription)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Sponsors)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Sponsors)
-            @Html.ValidationMessageFor(model => model.Sponsors)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.IsCharitable)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.IsCharitable)
-            @Html.ValidationMessageFor(model => model.IsCharitable)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Enter)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Enter)
-            @Html.ValidationMessageFor(model => model.Enter)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.City)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.City)
-            @Html.ValidationMessageFor(model => model.City)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.SelectedRegionId)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.SelectedRegionId)
-            @Html.ValidationMessageFor(model => model.SelectedRegionId)
-        </div>
-
-        <p>
-            <input type="submit" value="Save" />
-        </p>
     </fieldset>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

@@ -207,12 +207,12 @@
         <br />
         <div class="inline">
             <div class="editor-label">
-                <label class="required">Choose city</label>
+                <label class="required">Choose city from dropdown list</label>
             </div>
             <div class="editor-field longField">
                 <input type="text" id="City" disabled placeholder = "Event city holding" />
-                @Html.HiddenFor(model => model.City, new { id = "selectCity" })
-                @Html.ValidationMessageFor(model => model.City)             
+                @Html.HiddenFor(model => model.CityId, new { id = "selectCity" })
+                @Html.ValidationMessageFor(model => model.CityId)             
             </div>
         </div>
         <div class="inline">

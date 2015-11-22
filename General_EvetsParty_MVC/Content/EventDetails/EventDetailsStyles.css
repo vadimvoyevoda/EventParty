@@ -1,98 +1,248 @@
-﻿.title {
-    font-size:20pt;
-    color:white;
-    background-color:blue;
-    word-wrap: break-word;
+﻿.containmain {
+    margin-top:10px;
+    background-color: #eee;
+    padding-bottom: 70px;
+    padding-top: 35px;
 }
 
 .detailsmain {
-    width: 65vw;
-    margin-left: auto;
-    margin-right: auto;
-    background-color:white;
-    padding:15px;
+    width: 80vw;
+    margin:auto;    
 }
 
-.detailsmain> img {
-    display: block;
-    margin: auto;    
-    max-width: 100%;
-    max-height: 500px;
-}
-
-.first {
-    width:100%; 
-    white-space:nowrap;
-}
-
-.first> div { 
-    display:inline-block; 
+#EventInfo {
+    min-width: 250px;
+    width: 27vw;
+    display: inline-block;
     vertical-align: top;
-    width:50%;
-}
-
-.time > div > span:first-child {
-    width: 60px;
-    display: inline-block;
-    font-size:14pt;
-}
-
-.time > div > span:nth-child(2) {
-    font-size:16pt;
-}
-
-.time {
-    text-align:left;
-    padding-left: 5vw;
-}
-
-.organizer {
-    padding-right: 5vw;
-}
-
-.orginfo {
-    width: 200px;
-    text-align: center;
-    margin-right: 0;
-    margin-left: auto;
-}
-
-.orginfo img {    
-    width: 75px;
-    height: 75px;
-    border-radius: 50%;
-}
-
-.detailsmain > div > span:first-child {
-    font-size: 14pt;
-    color: blue;
-    width: 140px;
-    display: inline-block;
+    background-color: white;
+    margin-right: 2vw;
 }
 
 #charitable {
-    color:red;
-    font-size:16pt;
+    background-color: blue;
+    color: white;
+    font-size: 15pt;
+    float: left;
+    margin: 10px;
+    padding: 5px;
 }
 
 #free {
-    color:green;
-    font-size:16pt;
+        background-color: #2AA523;
+    color: white;
+    float: right;
+    margin: 10px;
+    font-size: 15pt;
+    padding: 5px;
 }
+
+#title {
+    color: #d71a21;
+    text-align: center;
+    font-family: sans-serif;
+        padding: 25px;    
+            padding-bottom: 65px;
+    margin-top: 50px;
+    box-shadow: 0 10px 10px -10px gray;
+    -webkit-box-shadow: 0 10px 10px -10px gray;
+    -moz-box-shadow: 0 10px 10px -10px gray;
+    
+}
+
+#bottom {
+    margin-top: -32px;
+}
+
+.time > div {
+    text-align: center;
+}
+
+.timeName {
+        display: inline-block;
+    width: 75px;
+    font-size: 13pt;
+    font-weight: bold;
+    color: rgba(128, 128, 128, 0.71);
+}
+
+.timeWatch
+{
+    background-color: #D71A21;
+    color: white;
+    padding: 7px;
+    font-family: sans-serif;
+    font-size: 14pt;
+    text-transform: uppercase;
+    width: 200px;
+    display:inline-block;
+        border: 1px solid wheat;
+}
+
+#short {
+        color: rgba(128, 128, 128, 0.84);
+    font-family: sans-serif;
+        padding: 20px;
+        word-wrap:break-word;
+}
+
+#buttons {
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+.btnAttend{
+    color: white;
+    background-color: rgb(48, 88, 145);
+    font-family: sans-serif;
+        margin-left: 5px;
+            padding: 4px;
+}
+
+.btnAttend:hover {
+   background-color: rgb(215, 26, 33);
+    box-shadow: 0 0 4px 1px black;
+}
+
+.btnAttend> span {
+    padding-left: 5px;
+    padding-right: 5px;
+    box-shadow: 0 0 4px 1px rgba(224, 224, 224, 0.97);
+    background-color: white;
+    color: black;
+}
+
+#EventPhoto {
+    display: inline-block;
+    vertical-align:top;
+        width: 49vw;
+        min-width: 250px;
+}
+
+#typecat {
+        background-color: #72D0F4;
+    color: white;
+    font-size: 18pt;
+    }
 
 #typediv, #catdiv {
     display:inline-block;
-    width:40%;    
+    width: 49%;
 }
 
-#second {
-    background-color:rgb(114, 208, 244);
-    color:white;
+#typediv {
+    padding-left:15px;
 }
 
+#catdiv {
+    text-align:right;
+        padding-right: 15px;
+    }
 
-
-.publsherlogin {
-    word-wrap:break-word;
+#EventPhoto>img {
+    max-width: 100%;
+    max-height: 100%;
 }
 
+#EventStatus {
+margin: auto;
+    width: 80%;
+    height: 80px;
+    margin-top: -40px;
+    border: 1px solid #ddd;
+    background-color: #f5f5f5;
+    box-shadow: 0px 0px 4px #d4d4d4;
+}
+
+#organizer img {
+        height: 60px;
+border-radius: 50%;
+margin-left: 15px;
+margin-top: 10px;
+}
+
+#publsherlogin {
+    color:gray;
+    margin-left:15px;
+}
+
+#marks {
+          margin-right: 5vw;
+    height: 50px;
+}
+
+.eventmark {
+    height: 100%;
+    float: right;
+    padding: 5px;
+    display: inline-block;
+}
+
+.eventmark img {
+    height: 80%;
+    cursor: pointer;
+    margin-top: 6px;
+}
+
+    .eventmark img:hover {
+        opacity:0.5;
+    }
+
+#EventDescr {
+    width:80vw;
+    margin:auto;
+            margin-top: 20px;
+    padding-left: 5vw;
+    padding-right: 5vw;
+}
+
+#eventcity {
+        color: #D71A21;
+    font-family: sans-serif;
+}
+
+#organizer {
+        float: right;
+    margin-right: 5vw;
+}
+
+#EventDescr img {
+    width: 40px;
+}
+
+.temp {
+    font-family: sans-serif;
+    display: inline-block;
+    width: 90%;
+    vertical-align: middle;
+}
+
+    .temp span {
+        color: blue;
+    }
+    
+#edit
+{
+    float: left;
+    font-family: sans-serif;
+    color: gray;
+    margin-left: 5vw;
+    margin-top: 30px;
+}
+
+    #edit:hover {
+        text-decoration: underline;    
+        cursor:pointer;
+    }
+
+#edit img{
+    height: 15px;
+    margin-right: 5px;
+}
+
+@media screen and (max-width: 1200px) {
+    .timeName, .timeWatch {
+        display:block;
+    }
+}

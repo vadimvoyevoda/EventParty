@@ -1,26 +1,42 @@
-﻿.wClass {
-    width: 200px;
+﻿#searchMenu {
+    min-width:250px;
+    width: 20vw;
+    padding: 10px;
+    margin-left: 10px;
+    background-color: #72D0F4;
 }
 
-#searchMenu {
-    background-color: white;
-    width: 260px;
-    padding-left: 10px;
-    padding-bottom: 10px;    
-    margin-left:10px;
-}
 .foundEvents {
-    width:80%;
+    width:75vw;
 }
 
 .foundEvents, #searchMenu {    
     display: inline-table;
 }
 
-#searchText, #country, #region, #city, #filteredSearch {
-    width:235px;
+#searchText, #country, #region, #city, #filteredSearch, #startTime, #endTime {
+    width: 100%;
 }
 
+input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    vertical-align: text-top;
+}
+
+#types > div, #categories > div, #charit, #entr {
+    margin-left: 2vw;
+}
+
+#filteredSearch {
+    color: white;
+    background-color: #4DE04D;
+}
+
+    #filteredSearch:hover {
+        background-color: red;
+    }
+    
 #searchMenu div {
     margin-top:10px;
 }

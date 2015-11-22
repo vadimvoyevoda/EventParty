@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace General_EvetsParty_MVC.Models
 {
-    public class EventViewModel
+    public class EventViewModel : IWideModel
     {
         public EventViewModel()
         {
@@ -42,17 +42,20 @@ namespace General_EvetsParty_MVC.Models
         public bool IsFreeEntrance { get; set; }
         public string Enter { get; set; }
 
-        [Required]        
-        public int City { get; set; }
+        [Required]
+        public int CityId { get; set; }
         [Required]
         public int SelectedRegionId { get; set; }
         public int SelectedCountryId { get; set; }
-        public HttpPostedFile MainPhoto { get; set; }
-        public List<HttpPostedFile> Photos { get; set; }
 
         public IEnumerable<SelectListItem> EventTypes { get; set; }
         public IEnumerable<SelectListItem> EventPersonCategories { get; set; }
         public IEnumerable<SelectListItem> Countries { get; set; }
         public IEnumerable<SelectListItem> Regions { get; set; }
+
+        public int Id { get; set; }
+        public EventCity City { get; set; }
+        public string MainPhoto { get; set; }
+        public List<string> Photos { get; set; }
     }
 }

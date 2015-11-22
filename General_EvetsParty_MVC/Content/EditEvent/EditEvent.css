@@ -1,0 +1,29 @@
+﻿.city span {
+    margin-left: 3vw;
+    color: #A59F9F;
+}
+
+    .city span:first-child {
+        margin-left:0;
+    }
+
+
+#iMainPhoto {
+    width: 100%;
+    height: 100%;
+    max-width: 800px;
+    max-height: 800px;
+    }
+
+#changePhoto {
+    display:block;
+        width: 100%;
+    max-width: 800px;
+}
+
+#Del {
+    background-color: #E04040;
+    color: white;
+    height: 35px;
+    width: 20%;
+}

@@ -2,6 +2,7 @@
      
  @{ ViewBag.Title = "EventModel"; }
 
+<link href="/Content/EventModel.css" rel="stylesheet" />
 <div class="col-md-4">
     <a href="@Url.Action("EventDetails","Event",new {id = Model.Id})">
         <ul class="spinning">
@@ -11,12 +12,10 @@
         </ul>
         <div class="view view-fifth">
             <img src="@Model.MainPhoto" class="img-responsive" alt="" />
-            <div class="mask">
-                <div class="info">Read More</div>
+            <div class="shortDesc">
+                @Html.DisplayFor(model => model.ShortDescription)
             </div>
         </div>
-        <div class="shortDesc">
-            @Html.DisplayFor(model => model.ShortDescription)
-        </div>
+        
     </a>
 </div>

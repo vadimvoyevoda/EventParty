@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValidationLibrary", "Valida
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchModelLibrary", "SearchModelLibrary\SearchModelLibrary.csproj", "{96D6E163-9531-4B8F-B29C-3D3388EEEC23}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChangeModelLibrary", "ChangeModelLibrary\ChangeModelLibrary.csproj", "{7ED3B92D-F769-44CE-A5D8-E256BED26464}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{96D6E163-9531-4B8F-B29C-3D3388EEEC23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96D6E163-9531-4B8F-B29C-3D3388EEEC23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96D6E163-9531-4B8F-B29C-3D3388EEEC23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7ED3B92D-F769-44CE-A5D8-E256BED26464}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7ED3B92D-F769-44CE-A5D8-E256BED26464}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7ED3B92D-F769-44CE-A5D8-E256BED26464}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7ED3B92D-F769-44CE-A5D8-E256BED26464}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

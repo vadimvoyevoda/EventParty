@@ -1,0 +1,5 @@
+C:\Users\Olexandr007\Documents\EventsParty\ChangeModelLibrary\bin\Debug\ChangeModelLibrary.dll
+C:\Users\Olexandr007\Documents\EventsParty\ChangeModelLibrary\bin\Debug\ChangeModelLibrary.pdb
+C:\Users\Olexandr007\Documents\EventsParty\ChangeModelLibrary\obj\Debug\ChangeModelLibrary.csprojResolveAssemblyReference.cache
+C:\Users\Olexandr007\Documents\EventsParty\ChangeModelLibrary\obj\Debug\ChangeModelLibrary.dll
+C:\Users\Olexandr007\Documents\EventsParty\ChangeModelLibrary\obj\Debug\ChangeModelLibrary.pdb

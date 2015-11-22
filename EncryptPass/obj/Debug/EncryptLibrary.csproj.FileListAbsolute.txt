@@ -41,3 +41,8 @@ I:\Курсак\EventsPartyProject\EncryptPass\bin\Debug\EncryptPass.dll
 I:\Курсак\EventsPartyProject\EncryptPass\bin\Debug\EncryptPass.pdb
 I:\Курсак\EventsPartyProject\EncryptPass\obj\Debug\EncryptPass.dll
 I:\Курсак\EventsPartyProject\EncryptPass\obj\Debug\EncryptPass.pdb
+C:\Users\Olexandr007\Documents\EventsParty\EncryptPass\bin\Debug\EncryptPass.dll
+C:\Users\Olexandr007\Documents\EventsParty\EncryptPass\bin\Debug\EncryptPass.pdb
+C:\Users\Olexandr007\Documents\EventsParty\EncryptPass\obj\Debug\EncryptLibrary.csprojResolveAssemblyReference.cache
+C:\Users\Olexandr007\Documents\EventsParty\EncryptPass\obj\Debug\EncryptPass.dll
+C:\Users\Olexandr007\Documents\EventsParty\EncryptPass\obj\Debug\EncryptPass.pdb

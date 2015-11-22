@@ -67,7 +67,7 @@ namespace General_EvetsParty_MVC.Controllers
 
         public ActionResult Events()
         {
-            var model = store.GetAllEvents().Where(e => e.Publisher.Login == HttpContext.User.Identity.Name);
+            var model = store.GetAllEvents().Where(e => e.Publisher.Login == HttpContext.User.Identity.Name).OrderByDescending(e=>e.Id);
             foreach (var el in model)
             {
                 el.MainPhoto = new PhotoManager().GetImage(el.MainPhoto, Server.MapPath("~"), true);

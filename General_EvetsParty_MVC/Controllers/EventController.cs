@@ -1,4 +1,5 @@
-﻿using DataAccess.Abstract;
+﻿using ChangeModelLibrary;
+using DataAccess.Abstract;
 using DataAccess.Concrete;
 using DataModel;
 using General_EvetsParty_MVC.Concrete;
@@ -7,6 +8,7 @@ using Newtonsoft.Json;
 using SearchModelLibrary;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -17,7 +19,7 @@ namespace General_EvetsParty_MVC.Controllers
     {
         DbStore store = new DbStore();
         IEventManager manager = new EventManager();
-        static EventViewModel currentEvent;
+        static IWideModel currentEvent;
 
         [HttpGet]
         public ActionResult Index()
@@ -60,7 +62,7 @@ namespace General_EvetsParty_MVC.Controllers
                     return Redirect("http://localhost:9456/Pages/LoginPage.aspx?publish=true");
                 }
                 else
-                {
+                {                    
                     return RedirectToAction("SaveEvent");
                 }
             }
@@ -90,11 +92,14 @@ namespace General_EvetsParty_MVC.Controllers
                 isFreeEntrance = currentEvent.IsFreeEntrance,
                 Enter = currentEvent.Enter,
                 Publisher = new EventCustomer { Login = userName },
-                City = new EventCity { Id = currentEvent.City}               
+                City = new EventCity { Id = currentEvent.CityId}               
             };
 
-            manager.CreateEvent(model);
-            return RedirectToAction("Events", "Profile");
+            if (manager.CreateEvent(model))
+            {
+                return RedirectToAction("Events", "Profile");
+            }
+            return View("Index", currentEvent);
         }
 
         public ActionResult AdvancedSearch(SearchModel searchModel)
@@ -165,12 +170,9 @@ namespace General_EvetsParty_MVC.Controllers
             return Json(categories, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult EventDetails(int id)
+        public void CreateModel(int id, IModel model, EventModel current)
         {
-            var current = new EventManager().GetEventById(id);
-
-            var model = new EventDetailsViewModel();
-            model.City = current.City;
+            model.Id = current.Id;
             model.Description = current.Description;
             model.EndTime = current.EndTime;
             model.Enter = current.Enter;
@@ -181,15 +183,118 @@ namespace General_EvetsParty_MVC.Controllers
             model.Organizers = current.Organizers;
             model.Place = current.Place;
             model.ShortDescription = current.ShortDescription;
-            model.PersonsCategory = current.PersonsCategory;
             model.Sponsors = current.Sponsors;
             model.StartTime = current.StartTime;
-            model.Title = current.Title;
+            model.Title = current.Title;            
+        }
+
+        public ActionResult EventDetails(int id)
+        {
+            var model = new EventDetailsViewModel();
+            var current = new EventManager().GetEventById(id);
+            CreateModel(id, model, current);
+            
+            model.City = current.City;
             model.Type = current.Type;
+            model.PersonsCategory = current.PersonsCategory;
             model.Publisher = current.Publisher;
             model.Publisher.Photo = new PhotoManager().GetImage(current.Publisher.Photo, Server.MapPath("~"), true);
-            
+            model.Members = current.Members;
+            model.MayAttend = current.MayAttend;
+            model.NoAttend = current.NoAttend;
+
             return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var model = new EditViewModel();
+            var current = new EventManager().GetEventById(id);
+            CreateModel(id, model, current);
+
+            model.SelectedTypeId = current.Type.Id;
+            model.SelectedPersonsCategoryId = current.PersonsCategory.Id;
+            model.EventTypes = store.GetAllEventTypes().OrderBy(t => t.Type)
+                .Select(eType => new SelectListItem { Value = eType.Id.ToString(), Text = eType.Type });
+            model.EventPersonCategories = store.GetAllPersonCategories().OrderBy(c => c.Category)
+                .Select(eCat => new SelectListItem { Value = eCat.Id.ToString(), Text = eCat.Category });
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(EditViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (!User.Identity.IsAuthenticated)
+                {
+                    return Redirect("http://localhost:9456/Pages/LoginPage.aspx?publish=true");
+                }
+                else
+                {
+                    return RedirectToAction("ChangeEvent", new System.Web.Routing.RouteValueDictionary(model));
+                }
+            }
+
+            return View(model);
+        }
+
+        public ActionResult ChangeEvent(EditViewModel changedModel)
+        {
+            string userName = HttpContext.User.Identity.Name;
+
+            ChangeModel model = new ChangeModel();
+            model.Title = changedModel.Title;
+            model.StartTime = changedModel.StartTime;
+            model.Sponsors = changedModel.Sponsors;
+            model.ShortDescription = changedModel.ShortDescription;
+            model.SelectedTypeId = changedModel.SelectedTypeId;
+            model.SelectedPersonsCategoryId = changedModel.SelectedPersonsCategoryId;
+            model.Place = changedModel.Place;
+            model.Photos = changedModel.Photos;
+            model.Organizers = changedModel.Organizers;
+            model.IsFreeEntrance = changedModel.IsFreeEntrance;
+            model.IsCharitable = changedModel.IsCharitable;
+            model.Id = changedModel.Id;
+            model.Enter = changedModel.Enter;
+            model.EndTime = changedModel.EndTime;
+            model.Description = changedModel.Description;
+            
+            //дописати додавання інших фото            
+            if (manager.ChangeEvent(model))
+            {
+                return RedirectToAction("EventDetails", "Event", new {id = model.Id});
+            }
+            return View("Edit", changedModel);
+        }
+
+        public bool ChangeMainPhoto(int id)
+        {
+            HttpPostedFile photo = System.Web.HttpContext.Current.Request.Files["HelpSectionImages"];
+            if (photo != null && photo.ContentLength > 0)
+            {
+                var fileName = Path.GetFileName(photo.FileName);
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    photo.InputStream.CopyTo(ms);
+                    byte[] imageBytes = ms.ToArray();
+                    
+                    // Convert byte[] to Base64 String
+                    string newImage = Convert.ToBase64String(imageBytes);
+                    return manager.ChangeMainPhoto(id, newImage);
+                }
+            }
+            return false;
+        }
+
+        public ActionResult DeleteEvent(int id)
+        {
+            if(manager.DeleteEvent(id))
+            {
+                return RedirectToAction("Events", "Profile");
+            }
+            return RedirectToAction("Edit", new { id = id });
         }
     }
 }

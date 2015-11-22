@@ -62,9 +62,6 @@
                             }))
                         }
                     });
-                },
-                select: function (event, ui) {
-                    $(this).blur();
                 }
             });
         });
@@ -86,11 +83,7 @@
                             }))
                         }
                     });
-                },
-                select: function (event, ui) {
-                    $("#city").prop('disabled', false);
-                    $(this).blur();
-                },
+                }
             });
         });
 
@@ -112,11 +105,7 @@
                             }))
                         }
                     });
-                },
-                select: function (event, ui) {
-                    $("#region").prop('disabled', false);
-                    $(this).blur();
-                },
+                }
             });
         });
 
@@ -130,7 +119,7 @@
     <label for="onlyTitles"> search only in titles</label>
     <br />
     <span>From: </span>
-    <div class='input-group date wClass' id='fromTime'>
+    <div class='input-group date' id='fromTime'>
         <input type="text" id="startTime">
         <span class="input-group-addon">
             <span class="glyphicon glyphicon-calendar"></span>
@@ -138,7 +127,7 @@
     </div>
     <span>To: </span>
 
-    <div class='input-group date wClass' id='toTime'>
+    <div class='input-group date' id='toTime'>
         <input type="text" id="endTime">
         <span class="input-group-addon">
             <span class="glyphicon glyphicon-calendar"></span>
@@ -164,10 +153,10 @@
     </script>
     <div><input type="text" id="country" placeholder="choose Country..." /></div>
     <div>
-        <input type="text" id="region" placeholder="choose Region..." disabled />
+        <input type="text" id="region" placeholder="choose Region..." />
     </div>
     <div>
-        <input type="text" id="city" placeholder="choose City..." disabled />
+        <input type="text" id="city" placeholder="choose City..." />
     </div>
     <br />
     <span>Choose Event Type</span>
@@ -193,11 +182,11 @@
     </div>
     <br />
     <span>Adding</span>
-    <div>
+    <div id="charit">
         <input type="checkbox" id="charitable" />
         <label for="charitable">charitable</label>
     </div>
-    <div>
+    <div id="entr">
         <input type="checkbox" id="free" />
         <label for="free">free entrance</label>
     </div>

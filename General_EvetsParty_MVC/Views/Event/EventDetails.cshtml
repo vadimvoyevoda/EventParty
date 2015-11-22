@@ -3,79 +3,113 @@
 @{
     ViewBag.Title = "EventDetails";
 }
-<link href="/Content/EventDetails/EventDetailsStyles.css" rel="stylesheet" />
 
-<div class="detailsmain">
-    
-    @if (Model.IsCharitable == true)
-    {
-        <span id="charitable">Charitable</span>
-    }
-    @if (Model.IsFreeEntrance == true)
-    {
-        <span id="free">Free Entrance</span>
-    }
-    <br />
-    <div class="title">
-        @Html.DisplayFor(model => model.Title)
-    </div>
-    <div id="second">
-        <div id="typediv">
-            <span>Type: </span>
-            <span>@Html.DisplayFor(model => model.Type)</span>
-        </div>
-        <div id="catdiv">
-            <span>PersonCategory: </span>
-            <span>@Html.DisplayFor(model => model.PersonsCategory.Category)</span>
-        </div>
-    </div>
-    <br />
-    <img src="@Model.MainPhoto"/>
-    <div class="first">        
-        <div class="time">
-            <div>
-                <span>Start :</span>
-                <span>@Html.DisplayFor(model => model.StartTime, "DateTimeLong")</span>
-            </div>
-            @if (Model.EndTime != null)
+@section head{
+    <link href="/Content/EventDetails/EventDetailsStyles.css" rel="stylesheet" />
+}
+
+<div class="containmain">
+    <div class="detailsmain">
+        <div id="EventInfo">
+            @if (Model.IsCharitable == true)
             {
-                <div>
-                    <span>End :</span>
-                    <span>@Html.DisplayFor(model => model.EndTime, "DateTimeLong")</span>
-                </div>
+                <span id="charitable">Charitable</span>
             }
-        </div>
-        <div class="organizer">
-            <div class="orginfo">
-                <img src="@Model.Publisher.Photo" />
-                <div class="publsherlogin">@Model.Publisher.Login</div>
+            @if (Model.IsFreeEntrance == true)
+            {
+                <span id="free">Free Entrance</span>
+            }
+            <h2 id="title">
+                @Html.DisplayFor(model => model.Title)
+            </h2>
+            <div id="bottom">
+            <div class="time">
+                <div>
+                    <div class="timeWatch">@Html.DisplayFor(model => model.StartTime, "DateTimeLong")</div>
+                </div>
+
+                @if (Model.EndTime != null)
+                {
+                    <div>
+                        <div class="timeName">Finish :</div>
+                        <div class="timeWatch">@Html.DisplayFor(model => model.EndTime, "DateTimeLong")</div>
+                    </div>
+                }
             </div>
+            <div id="short">@Html.DisplayFor(model => model.ShortDescription)</div>
+                <div id="buttons">
+            <button class="btnAttend">Attend
+                     @if(Model.Members != null){<span>@Model.Members.Count</span>}else{<span>0</span>}</button>
+            <button class="btnAttend">Maybe Attend
+                      @if(Model.MayAttend != null){<span>@Model.MayAttend.Count</span>}else{<span>0</span>}</button>
+            <button class="btnAttend">No Attend
+                     @if(Model.NoAttend != null){<span>@Model.NoAttend.Count</span>}else{<span>0</span>}</button>
+            </div>
+                </div>
+
         </div>
+        <div id="EventPhoto">
+            <div id="typecat">
+                <div id="typediv">
+                    <span>@Html.DisplayFor(model => model.Type)</span>
+                </div>
+                <div id="catdiv">
+                    <span>@Html.DisplayFor(model => model.PersonsCategory.Category)</span>
+                </div>
+            </div>
+            <img src="@Model.MainPhoto"/>            
+        </div>
+    </div>       
+ </div>
+ <div id="EventStatus">
+     @if(User.Identity.IsAuthenticated && User.Identity.Name == Model.Publisher.Login)
+     {
+         <a href='@Url.Action("Edit", "Event", new { id = Model.Id})' id="edit"><img src="/images/edit.png" />Edit</a>
+     }
+        <a href="" id="organizer">
+            <img src="@Model.Publisher.Photo" />
+            <span id="publsherlogin">@Model.Publisher.Login</span>
+        </a>    
     </div>
 
-   
+<div id="EventDescr">
     <div>
-        <span>Where: </span>
-        <span>@Html.DisplayFor(model => model.Place)</span>
+        <div id="eventcity">@Html.DisplayFor(model => model.City.Region.Country.Country), @Html.DisplayFor(model => model.City.Region.RegionName), @Html.DisplayFor(model => model.City.CityName)</div>
+        <img src="/images/place.png" />
+        <div class="temp">            
+            <span>Where : </span>@Html.DisplayFor(model => model.Place)</div>
+    </div>
+     <br />
+    <div>
+        <img src="/images/organizers.png" />
+        <div class="temp"><span>Organizers : </span>@Html.DisplayFor(model => model.Organizers)</div>
     </div>
     <br />
+    @if (!string.IsNullOrEmpty(Model.Sponsors))
+    {
     <div>
-        <span>About event: </span>
-        <span>@Html.DisplayFor(model => model.Description)</span>
+        <img src="/images/sponsors.png" />
+        <div class="temp"><span>Sponsors: </span>
+        @Html.DisplayFor(model => model.Sponsors)</div>
     </div>
     <br />
-    <div>
-        <span>Organizers: </span>
-        <span>@Html.DisplayFor(model => model.Organizers)</span>
+    }
+    @if(!string.IsNullOrEmpty(Model.Enter))
+    {
+        <div>
+            <img src="/images/entrance.png" />
+        <div class="temp"><span>Enter: </span>
+        @Html.DisplayFor(model => model.Enter)</div>
     </div>
     <br />
+    }
     <div>
-        <span>Sponsors: </span>
-        <span>@Html.DisplayFor(model => model.Sponsors)</span>
+        <div class="temp">@Html.DisplayFor(model => model.Description)</div>
     </div>
-    <br />
-    <div>
-        <span>Enter: </span>
-        <span>@Html.DisplayFor(model => model.Enter)</span>
-    </div>    
- </div>
+   <div id="marks">
+                <div class="eventmark">
+                    <img src="/images/like.png" title="like" /></div>
+                <div class="eventmark">
+                    <img src="/images/dislike.png" title="dislike" /></div>
+            </div>
+</div>

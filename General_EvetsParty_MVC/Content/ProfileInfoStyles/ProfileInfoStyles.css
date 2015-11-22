@@ -1,5 +1,6 @@
 ﻿fieldset {
     display: inline;
+    border-left: 2px solid lightgray;
 }
 
 img {
@@ -26,6 +27,10 @@ img {
 #profileMenu, #userInfo, #img_info {
     display: inline-table;
     margin-left: 10px;
+}
+
+#profileMenu {
+    background-color: rgba(114, 208, 244, 0.18);
 }
 
 #img_info {

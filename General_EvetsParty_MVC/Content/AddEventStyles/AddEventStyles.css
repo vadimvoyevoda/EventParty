@@ -54,6 +54,10 @@ fieldset div {
     min-width: 375px;
 }
 
+#datetimepicker1, #datetimepicker2 {
+    width:375px;
+}
+
 #City {
     width: 60%;
     max-width: 500px;
@@ -69,20 +73,11 @@ label
 }
 
 fieldset > div, h3 {
-    margin-left: 25px;
+    margin-left: 3vw;
 }
 
 select, #City  {
     width:375px;
-}
-
-#eventMainPhoto {
-    text-align:center;
-}
-
-#iMainPhoto {
-    max-width: 60%;
-    max-height: 400px;
 }
 
 .required:after 
@@ -96,15 +91,16 @@ select, #City  {
     min-width: 300px;
     width: 100%;
     max-width: 500px;
-    height:35px;
+    height: 35px;
     background-color: rgba(0, 255, 94, 0.88);
     color: white;
 }
 
 .Create {
-    text-align: right;
-    width: 70%;
-    margin-bottom:10px;
+    text-align: center;
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 10px;
 }
 
 fieldset {

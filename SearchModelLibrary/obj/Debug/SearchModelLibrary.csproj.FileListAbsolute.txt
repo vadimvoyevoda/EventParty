@@ -7,3 +7,7 @@ I:\Курсак\EventsPartyProject\SearchModelLibrary\bin\Debug\SearchModelLibra
 I:\Курсак\EventsPartyProject\SearchModelLibrary\bin\Debug\SearchModelLibrary.pdb
 I:\Курсак\EventsPartyProject\SearchModelLibrary\obj\Debug\SearchModelLibrary.dll
 I:\Курсак\EventsPartyProject\SearchModelLibrary\obj\Debug\SearchModelLibrary.pdb
+C:\Users\Olexandr007\Documents\EventsParty\SearchModelLibrary\bin\Debug\SearchModelLibrary.dll
+C:\Users\Olexandr007\Documents\EventsParty\SearchModelLibrary\bin\Debug\SearchModelLibrary.pdb
+C:\Users\Olexandr007\Documents\EventsParty\SearchModelLibrary\obj\Debug\SearchModelLibrary.dll
+C:\Users\Olexandr007\Documents\EventsParty\SearchModelLibrary\obj\Debug\SearchModelLibrary.pdb

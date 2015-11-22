@@ -66,6 +66,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ChangeModelLibrary\ChangeModelLibrary.csproj">
+      <Project>{7ed3b92d-f769-44ce-a5d8-e256bed26464}</Project>
+      <Name>ChangeModelLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataModel\DataModel.csproj">
       <Project>{353fb2be-a881-40ce-b052-64f9e13813d1}</Project>
       <Name>DataModel</Name>
