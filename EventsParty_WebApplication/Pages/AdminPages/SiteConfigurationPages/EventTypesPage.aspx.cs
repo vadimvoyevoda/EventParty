@@ -62,14 +62,33 @@ namespace EventsParty_WebApplication.Pages.AdminPages
 
         protected void gvItems_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if (e.CommandName == "DeleteRow")
+            switch(e.CommandName)
             {
-                int id = Convert.ToInt32(e.CommandArgument);
-                if (typeManager.Delete(id))
-                {
-                    SetTypes();
-                }
-            }
+                case "DeleteRow":
+                    int id = Convert.ToInt32(e.CommandArgument);
+                    if (typeManager.Delete(id))
+                    {
+                        SetTypes();
+                    }
+                    break;
+                case "ShowColors":
+                    iColorPicker.Attributes["class"] = "show";
+                    hideCP.Attributes["class"] = "show";
+                    upColor.Update();
+                    break;
+                case "ChooseColor":
+                    string color = iColorPicker.Value;
+                    iColorPicker.Attributes["class"] = "hidden";
+                    hideCP.Attributes["class"] = "hidden";
+                    upColor.Update();
+                    int Id = Convert.ToInt32(e.CommandArgument);
+                    if ((typeManager as TypeManager).SetColor(Id, color))
+                    {
+                        SetTypes();
+                        upGrid.Update();
+                    }                    
+                    break;
+            } 
         }
 
         public bool EditFieldValid(string text)
@@ -102,5 +121,13 @@ namespace EventsParty_WebApplication.Pages.AdminPages
                 SetTypes();
             }
         }
+
+        protected void hideCP_Click(object sender, EventArgs e)
+        {
+            iColorPicker.Attributes["class"] = "hidden";
+            hideCP.Attributes["class"] = "hidden";
+            upColor.Update();
+        }
+
     }
 }

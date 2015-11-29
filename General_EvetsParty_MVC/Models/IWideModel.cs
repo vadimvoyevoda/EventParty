@@ -42,5 +42,8 @@ namespace General_EvetsParty_MVC.Models
         int CityId { get; set; }
         string MainPhoto { get; set; }
         List<string> Photos { get; set; }
+
+        List<EventLike> Likes { get; set; }
+        List<EventLike> DisLikes { get; set; }
     }
 }

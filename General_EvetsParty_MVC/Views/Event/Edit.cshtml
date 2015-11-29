@@ -42,15 +42,6 @@
                 resImg[0].src = oFREvent.target.result;              
             };
         };
-        
-        //var resImg = $("#iMainPhoto");
-        //if (resImg.length == 0) {
-        //    $('<img/>').attr({
-        //        id: 'iMainPhoto',
-        //        src: oFREvent.target.result,
-        //        title: "Event Main Photo"
-        //    }).appendTo('#eventMainPhoto');
-        //}
     </script>
 }
  
@@ -140,7 +131,19 @@
                 @Html.ValidationMessageFor(model => model.SelectedPersonsCategoryId)
             </div>
         </div>
-        <br />    
+        
+        <div id="eventMainPhoto">
+            <div>
+            <div class="editor-label">
+                Change Main Photo
+            </div>
+            <div class="editor-field">
+                @Html.TextBox("image", null, new { type = "file", id = "changePhotoBtn", name = "photo", accept = "image/*", onchange = "PreviewMainImage()" })
+                <img src=@Url.Content(Model.MainPhoto) id="iMainPhoto"/>
+                <button id="changePhoto">SavePhoto</button>
+            </div>
+        </div>
+        </div>    
         <div>
             <div class="editor-label">
                 @Html.LabelFor(model => model.Place, new { @class = "required" })
@@ -160,28 +163,6 @@
             </div>
         </div>
         
-        <div id="eventMainPhoto">
-            <div>
-            <div class="editor-label">
-                Change Main Photo
-            </div>
-            <div class="editor-field">
-                @Html.TextBox("image", null, new { type = "file", id = "changePhotoBtn", name = "photo", accept = "image/*", onchange = "PreviewMainImage()" })
-                <img src=@Url.Content(Model.MainPhoto) id="iMainPhoto"/>
-                <button id="changePhoto">SavePhoto</button>
-            </div>
-        </div>
-        </div>
-        @*
-        <div>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Photos)
-            </div>
-            <div class="editor-field">
-                @Html.TextBoxFor(model => model.Photos, new { type = "file", id = "choosePhotos", name = "photo", accept = "image/*", onchange = "PreviewImages()", multiple = "multiple" })
-                @Html.ValidationMessageFor(model => model.MainPhoto)
-            </div>
-        </div>*@
         <div>
             <div class="editor-label">
                 @Html.LabelFor(model => model.ShortDescription, new { @class = "required" })

@@ -69,6 +69,14 @@
     <Compile Include="Migrations\201510311448557_IsFreeEntrance.Designer.cs">
       <DependentUpon>201510311448557_IsFreeEntrance.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511281624545_TypeExtend.cs" />
+    <Compile Include="Migrations\201511281624545_TypeExtend.Designer.cs">
+      <DependentUpon>201511281624545_TypeExtend.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511291442223_Dislikes.cs" />
+    <Compile Include="Migrations\201511291442223_Dislikes.Designer.cs">
+      <DependentUpon>201511291442223_Dislikes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -93,6 +101,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510311448557_IsFreeEntrance.resx">
       <DependentUpon>201510311448557_IsFreeEntrance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511281624545_TypeExtend.resx">
+      <DependentUpon>201511281624545_TypeExtend.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511291442223_Dislikes.resx">
+      <DependentUpon>201511291442223_Dislikes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

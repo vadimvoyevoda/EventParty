@@ -16,10 +16,12 @@ namespace DataModel.Migrations
         {
             using (var ctx = new EventContext())
             {
-                ctx.Permissions.Add(new EventPermission { Type = "User"});
-                ctx.Ratings.Add(new EventRating { Name = "Low" });
+                //ctx.Permissions.Add(new EventPermission { Type = "User"});
+                //ctx.Ratings.Add(new EventRating { Name = "Low" });
 
-                ctx.SaveChanges();
+                //ctx.LikeCommentTypes.Add(new LikeCommentType { Type = "positive" });
+                //ctx.LikeCommentTypes.Add(new LikeCommentType { Type = "negative" });
+                //ctx.SaveChanges();
             }
         }
     }

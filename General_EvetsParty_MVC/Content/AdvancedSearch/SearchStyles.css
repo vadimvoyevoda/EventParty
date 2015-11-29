@@ -4,6 +4,8 @@
     padding: 10px;
     margin-left: 10px;
     background-color: #72D0F4;
+    margin-top: 10px;
+    border-radius: 10px;
 }
 
 .foundEvents {
@@ -12,6 +14,7 @@
 
 .foundEvents, #searchMenu {    
     display: inline-table;
+    vertical-align:top;
 }
 
 #searchText, #country, #region, #city, #filteredSearch, #startTime, #endTime {
@@ -43,4 +46,20 @@ input[type="checkbox"] {
 
 label {
     font-weight:normal;
+}
+
+.extendIcon {
+    width:10px;
+}
+
+.upper {
+    text-transform:uppercase;
+}
+
+.extend {
+    cursor:pointer;
+}
+
+.extend:hover {
+    text-decoration: underline;
 }

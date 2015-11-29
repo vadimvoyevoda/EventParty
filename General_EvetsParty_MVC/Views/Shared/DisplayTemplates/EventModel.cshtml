@@ -2,17 +2,27 @@
      
  @{ ViewBag.Title = "EventModel"; }
 
-<link href="/Content/EventModel.css" rel="stylesheet" />
 <div class="col-md-4">
     <a href="@Url.Action("EventDetails","Event",new {id = Model.Id})">
-        <ul class="spinning">
+        <ul class="spinning" style="background-color:@Model.Type.Color">
             <li class="room"><div class="time">@Html.DisplayFor(model => model.StartTime)</div><div class="type">@Html.DisplayFor(model => model.Type)</div></li>
-            <li class="live">@Html.DisplayFor(model => model.Title)</li>
-            <div class="clear"></div>
+            <li class="live">@if (Model.Title.Length > 38) { <span>@Model.Title.Substring(0, 32)...</span> }else{<span>@Model.Title</span>}</li>
         </ul>
         <div class="view view-fifth">
-            <img src="@Model.MainPhoto" class="img-responsive" alt="" />
-            <div class="shortDesc">
+            <div class="likeBlock">
+                <img src="/images/dislike.png" class="likeImg"/>
+                <div class="likeCount">@if (Model.Dislikes != null)
+                     { <span>@Model.Dislikes.Count</span>}
+                     else
+                     {<span>0</span>}</div>
+                <img src="/images/like.png" class="likeImg"/>
+                <div class="likeCount">@if (Model.Likes != null)
+                     { <span>@Model.Likes.Count</span>}
+                     else
+                     {<span>0</span>}</div>
+            </div>
+            <img id="photo" src="@Model.MainPhoto" class="img-responsive"/>
+            <div class="shortDesc" style="background-color:rgba(@System.Drawing.ColorTranslator.FromHtml(Model.Type.Color).R,@System.Drawing.ColorTranslator.FromHtml(Model.Type.Color).G,@System.Drawing.ColorTranslator.FromHtml(Model.Type.Color).B,0.7)">
                 @Html.DisplayFor(model => model.ShortDescription)
             </div>
         </div>

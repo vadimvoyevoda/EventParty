@@ -91,7 +91,9 @@ namespace DataAccess.Concrete
         {
             using (var ctx = new EventContext())
             {
-                return ctx.Events.Include("Type").Include("PersonsCategory").Include("Publisher").Include("City").Include("City.Region").Include("City.Region.Country").ToList();
+                return ctx.Events.Include("Type").Include("PersonsCategory")
+                    .Include("Publisher").Include("City").Include("City.Region")
+                    .Include("City.Region.Country").Include("Likes").Include("Dislikes").ToList();
             }
         }
 

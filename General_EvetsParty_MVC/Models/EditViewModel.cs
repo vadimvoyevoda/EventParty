@@ -50,5 +50,10 @@ namespace General_EvetsParty_MVC.Models
         public int CityId { get; set; }
         public IEnumerable<SelectListItem> EventTypes { get; set; }
         public IEnumerable<SelectListItem> EventPersonCategories { get; set; }
+
+
+        public List<EventLike> Likes{ get; set; }
+        public List<EventLike> DisLikes { get; set; }
+        
     }
 }

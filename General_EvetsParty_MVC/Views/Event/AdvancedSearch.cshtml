@@ -109,6 +109,16 @@
             });
         });
 
+        function Extend(elem) {
+            var id = "#" + elem.id.substring(1);
+            if ($(id).css("display") == "block") {
+                elem.children[0].src = "/images/close.png";
+            }
+            else {
+                elem.children[0].src = "/images/extended.png";
+            }
+            $(id).toggle("slow");
+        }
 
     </script>
 }
@@ -118,15 +128,14 @@
     <input type="checkbox" id="onlyTitles" checked />
     <label for="onlyTitles"> search only in titles</label>
     <br />
-    <span>From: </span>
+    <span class="upper">From: </span>
     <div class='input-group date' id='fromTime'>
         <input type="text" id="startTime">
         <span class="input-group-addon">
             <span class="glyphicon glyphicon-calendar"></span>
         </span>
     </div>
-    <span>To: </span>
-
+    <span class="upper">To: </span>
     <div class='input-group date' id='toTime'>
         <input type="text" id="endTime">
         <span class="input-group-addon">
@@ -158,8 +167,7 @@
     <div>
         <input type="text" id="city" placeholder="choose City..." />
     </div>
-    <br />
-    <span>Choose Event Type</span>
+    <div id="btypes" class="upper extend" onclick="Extend(this)"><img class="extendIcon" src="/images/extended.png"/>Choose Event Type</div>
     <div id="types">
         @foreach (var type in ViewBag.Types)
         {
@@ -169,8 +177,7 @@
             </div>
         }
     </div>
-    <br />
-    <span>Choose Person Category</span>
+    <div id="bcategories" class="upper extend" onclick="Extend(this)"><img class="extendIcon" src="/images/extended.png"/>Choose Person Category</div>
     <div id="categories">
         @foreach (var cat in ViewBag.Categories)
         {
@@ -180,8 +187,7 @@
             </div>
         }
     </div>
-    <br />
-    <span>Adding</span>
+    <div class="upper">Adding</div>
     <div id="charit">
         <input type="checkbox" id="charitable" />
         <label for="charitable">charitable</label>
@@ -190,7 +196,8 @@
         <input type="checkbox" id="free" />
         <label for="free">free entrance</label>
     </div>
-    <input type="submit" id="filteredSearch" value="Search" />
+    <br />
+    <input type="submit" id="filteredSearch" class="upper" value="Search" />
 </div>
 <div class="foundEvents">
     <div class="pageContent">

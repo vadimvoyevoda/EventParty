@@ -46,5 +46,8 @@ namespace General_EvetsParty_MVC.Models
         public List<EventCustomer> Members { get; set; }
         public List<EventCustomer> MayAttend { get; set; }
         public List<EventCustomer> NoAttend { get; set; }
+
+        public List<EventLike> Likes { get; set; }
+        public List<EventLike> DisLikes { get; set; }
     }
 }

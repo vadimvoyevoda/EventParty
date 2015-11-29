@@ -52,7 +52,9 @@ namespace DataAccess.Concrete
             {
                 var current = ctx.Events.Include("Type").Include("PersonsCategory")
                     .Include("City").Include("City.Region").Include("City.Region.Country")
-                    .Include("Publisher").Include("Comments").Include("Likes").Include("MayAttend").Include("Members").Include("NoAttend")
+                    .Include("Publisher").Include("Comments").Include("Likes").Include("Dislikes")
+                    .Include("Likes.Customer").Include("Dislikes.Customer")
+                    .Include("MayAttend").Include("Members").Include("NoAttend")
                     .FirstOrDefault(e => e.Id == id);
 
                 if (current != default(EventModel))
@@ -107,8 +109,7 @@ namespace DataAccess.Concrete
             }
             return false;
         }
-
-
+        
         public bool DeleteEvent(int id)
         {
             using (var ctx = new EventContext())
@@ -119,6 +120,108 @@ namespace DataAccess.Concrete
                     ctx.Events.Remove(del);
                     ctx.SaveChanges();
                     return true;
+                }
+                return false;
+            }
+        }
+
+        public List<EventLike> GetLikes(int id, bool likes)
+        {
+            using (var ctx = new EventContext())
+            {
+                var cur = ctx.Events.FirstOrDefault(e => e.Id == id);
+                if (cur != default(EventModel))
+                {
+                    if (likes)
+                    {
+                        return cur.Likes;
+                    }
+                    return cur.Dislikes;
+                }
+                return null;
+            }
+        }
+
+        private bool isExistLike(List<EventLike> likes, string login)
+        {
+            foreach (var el in likes)
+            {
+                if (el.Customer.Login == login)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private bool LikeTransfer(List<EventLike> same, List<EventLike> other, string login, EventContext ctx)
+        {
+            if (isExistLike(same, login))
+            {
+                return false;
+            }
+            if (isExistLike(other, login))
+            {
+                var curDislike = other.FirstOrDefault(e => e.Customer.Login == login);
+                if (curDislike != default(EventLike))
+                {
+                    other.Remove(curDislike);
+                    ctx.Likes.Remove(curDislike);
+                }
+            }
+            return true;
+        }
+
+        private bool AddNewLike(bool likes, EventContext ctx, EventModel curEvent, EventCustomer customer)
+        {
+            var likeType = likes ? ctx.LikeCommentTypes.FirstOrDefault(l => l.Type == "positive")
+                                         : ctx.LikeCommentTypes.FirstOrDefault(l => l.Type == "negative");
+            if (likeType != default(LikeCommentType))
+            {
+                var like = new EventLike { Type = likeType, Event = curEvent, Customer = customer };
+                ctx.Likes.Add(like);
+                if (likes)
+                {                    
+                    curEvent.Likes.Add(like);
+                }
+                else
+                {                    
+                    curEvent.Dislikes.Add(like);
+                }
+                return true;
+            }
+            return false;
+        }
+
+        public bool AddLike(int id, bool likes, string login)
+        {
+            using (var ctx = new EventContext())
+            {
+                var customer = ctx.Customers.FirstOrDefault(e => e.Login == login);
+                var curEvent = ctx.Events.FirstOrDefault(e => e.Id == id);
+                if (curEvent != default(EventModel) &&
+                    customer != default(EventCustomer) && !customer.IsBan && !customer.IsDeleted)
+                {
+                    if (likes)
+                    {
+                        if (!LikeTransfer(curEvent.Likes, curEvent.Dislikes, login, ctx))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!LikeTransfer(curEvent.Dislikes, curEvent.Likes, login, ctx))
+                        {
+                            return false;
+                        }
+                    }
+
+                    if (AddNewLike(likes, ctx, curEvent, customer))
+                    {
+                        ctx.SaveChanges();
+                        return true;
+                    }
                 }
                 return false;
             }

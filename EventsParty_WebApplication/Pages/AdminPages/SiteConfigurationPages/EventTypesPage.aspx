@@ -27,7 +27,13 @@
             </ContentTemplate>
         </asp:UpdatePanel>
         <br />
-    </div>    
+    </div> 
+    <asp:UpdatePanel runat="server" ID="upColor" UpdateMode="Conditional" ClientIDMode="Static" ChildrenAsTriggers="False">
+        <ContentTemplate>
+            <input id="iColorPicker" name="colorPicker" type="color" runat="server" class="hidden"/>
+            <asp:Button runat="server" ID="hideCP" class="hidden" OnClick="hideCP_Click" Text="Hide Color Picker"></asp:Button>
+        </ContentTemplate>
+    </asp:UpdatePanel> 
     <asp:UpdatePanel runat="server" ID="upGrid" UpdateMode="Conditional" ClientIDMode="Static" ChildrenAsTriggers="False">
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="btnSave" EventName="Click" />
@@ -53,7 +59,15 @@
                                 <asp:Image ID="iDelete" runat="server" ImageUrl="/Images/delete.png" />
                             </asp:LinkButton>
                         </ItemTemplate>
-                    </asp:TemplateField>                   
+                    </asp:TemplateField>    
+                    <asp:TemplateField HeaderText="Color">
+                        <ItemTemplate>
+                            <asp:Panel runat="server" class="typeColor" BackColor='<%# Eval("Color") != null ? System.Drawing.ColorTranslator.FromHtml(Eval("Color").ToString()) : System.Drawing.Color.Transparent%>'></asp:Panel> 
+                            <asp:Button ID="Button1" runat="server" ToolTip="ChooseColor" Text="Choose" CommandName="ShowColors"/>                          
+                            <asp:Button runat="server" ToolTip="SaveColor" Text="Save" CommandName="ChooseColor" 
+                                CommandArgument='<%#Eval("Id")%>'/>
+                        </ItemTemplate>
+                    </asp:TemplateField>               
                 </Columns>
             </asp:GridView>
         </ContentTemplate>

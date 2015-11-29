@@ -78,24 +78,36 @@
         }
 
 
-        //function PreviewMainImage() {
-        //    var oFReader = new FileReader();
-        //    oFReader.readAsDataURL($("#changePhotoBtn")[0].files[0]);
+        function SaveMainImage() {
+            var data = new FormData();
+            var files = $("#changePhotoBtn").get(0).files;
+            if (files.length > 0) {
+                data.append("HelpSectionImages", files[0]);
+            }
 
-        //    oFReader.onload = function (oFREvent) {
-        //        var resImg = $("#iMainPhoto");
-        //        if (resImg.length == 0) {
-        //            $('<img/>').attr({
-        //                id: 'iMainPhoto',
-        //                src: oFREvent.target.result,
-        //                title: "selectedPhoto"
-        //            }).appendTo('#eventMainPhoto');
-        //        }
-        //        else {
-        //            resImg[0].src = oFREvent.target.result;
-        //        }
-        //    };
-        //};
+            $.ajax({
+                url: "/Event/SetEventPhoto",
+                type: "POST",
+                processData: false,
+                contentType: false,
+                data: data,
+                success: function (response) {
+                    if (response == "True") {
+                        var oFReader = new FileReader();
+                        oFReader.readAsDataURL($("#changePhotoBtn")[0].files[0]);
+                        oFReader.onload = function (oFREvent) {
+                            var resImg = $("#iMainPhoto");
+                            resImg[0].src = oFREvent.target.result;
+                        };
+                    }
+                },
+                error: function (er) {
+                    alert(er);
+                }
+            });
+
+            
+        };
 
     </script>
 }
@@ -186,7 +198,17 @@
                 @Html.ValidationMessageFor(model => model.SelectedPersonsCategoryId)
             </div>
         </div>
-        <br />
+         <div id="eventMainPhoto">
+            <div>
+            <div class="editor-label">
+                Change Main Photo
+            </div>
+            <div class="editor-field">
+                @Html.TextBox("image", null, new { type = "file", id = "changePhotoBtn", name = "photo", accept = "image/*", onchange = "SaveMainImage()" })
+                <img src="@Model.MainPhoto" id="iMainPhoto"/>
+            </div>
+        </div>
+        </div>  
         <div class="inline ">
             <div class="editor-label">
                 <label class = "required">Country</label>
@@ -241,27 +263,7 @@
                 @Html.TextBoxFor(model => model.Organizers, new { placeholder = "Who will organize event" })
                 @Html.ValidationMessageFor(model => model.Organizers)             
             </div>
-        </div>
-        @*<div>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.MainPhoto)
-            </div>
-            <div class="editor-field">
-                @Html.TextBoxFor(model => model.MainPhoto, new { type = "file", id = "changePhotoBtn", name = "photo", accept = "image/*", onchange = "PreviewMainImage()" })
-                @Html.ValidationMessageFor(model => model.MainPhoto)
-            </div>
-        </div>
-        <div id="eventMainPhoto">
-        </div>
-        <div>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Photos)
-            </div>
-            <div class="editor-field">
-                @Html.TextBoxFor(model => model.Photos, new { type = "file", id = "choosePhotos", name = "photo", accept = "image/*", onchange = "PreviewImages()", multiple = "multiple" })
-                @Html.ValidationMessageFor(model => model.MainPhoto)
-            </div>
-        </div>*@
+        </div>     
         <div>
             <div class="editor-label">
                 @Html.LabelFor(model => model.ShortDescription, new { @class = "required" })

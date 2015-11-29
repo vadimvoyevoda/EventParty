@@ -57,5 +57,8 @@ namespace General_EvetsParty_MVC.Models
         public EventCity City { get; set; }
         public string MainPhoto { get; set; }
         public List<string> Photos { get; set; }
+
+        public List<EventLike> Likes { get; set; }
+        public List<EventLike> DisLikes { get; set; }
     }
 }

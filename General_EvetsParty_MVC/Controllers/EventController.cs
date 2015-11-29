@@ -20,6 +20,7 @@ namespace General_EvetsParty_MVC.Controllers
         DbStore store = new DbStore();
         IEventManager manager = new EventManager();
         static IWideModel currentEvent;
+        static string TempEventPhoto= null;
 
         [HttpGet]
         public ActionResult Index()
@@ -40,6 +41,8 @@ namespace General_EvetsParty_MVC.Controllers
 
             model.Countries = store.GetAllCountries().OrderBy(c => c.Country)
                 .Select(eC => new SelectListItem { Value = eC.Id.ToString(), Text = eC.Country });
+
+            model.MainPhoto = new PhotoManager().GetImage(null, Server.MapPath("~"), true);
         }
 
         [HttpPost]
@@ -84,6 +87,7 @@ namespace General_EvetsParty_MVC.Controllers
                 Type = new EventType { Id = currentEvent.SelectedTypeId },
                 PersonsCategory = new EventPersonCategory { Id = currentEvent.SelectedPersonsCategoryId },
                 Place = currentEvent.Place,
+                MainPhoto = TempEventPhoto,
                 Organizers = currentEvent.Organizers,
                 Description = currentEvent.Description,
                 ShortDescription = currentEvent.ShortDescription,
@@ -105,7 +109,7 @@ namespace General_EvetsParty_MVC.Controllers
         public ActionResult AdvancedSearch(SearchModel searchModel)
         {
             IEnumerable<EventModel> model = new List<EventModel>();
-            model = store.GetFilteredEvents(searchModel);            
+            model = store.GetFilteredEvents(searchModel).OrderByDescending(e=>e.Id);            
 
             foreach (var el in model)
             {
@@ -170,7 +174,35 @@ namespace General_EvetsParty_MVC.Controllers
             return Json(categories, JsonRequestBehavior.AllowGet);
         }
 
-        public void CreateModel(int id, IModel model, EventModel current)
+        public string GetPhoto()
+        {
+            HttpPostedFile photo = System.Web.HttpContext.Current.Request.Files["HelpSectionImages"];
+            if (photo != null && photo.ContentLength > 0)
+            {
+                var fileName = Path.GetFileName(photo.FileName);
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    photo.InputStream.CopyTo(ms);
+                    byte[] imageBytes = ms.ToArray();
+
+                    // Convert byte[] to Base64 String
+                    return Convert.ToBase64String(imageBytes);
+                }
+            }
+            return null;
+        }
+
+        public bool SetEventPhoto()
+        {
+            TempEventPhoto = GetPhoto();
+            if(TempEventPhoto == null)
+            {
+                return false;
+            } 
+            return true;
+        }
+
+        public void CreateModel(IModel model, EventModel current)
         {
             model.Id = current.Id;
             model.Description = current.Description;
@@ -192,7 +224,7 @@ namespace General_EvetsParty_MVC.Controllers
         {
             var model = new EventDetailsViewModel();
             var current = new EventManager().GetEventById(id);
-            CreateModel(id, model, current);
+            CreateModel(model, current);
             
             model.City = current.City;
             model.Type = current.Type;
@@ -202,7 +234,8 @@ namespace General_EvetsParty_MVC.Controllers
             model.Members = current.Members;
             model.MayAttend = current.MayAttend;
             model.NoAttend = current.NoAttend;
-
+            model.Likes = current.Likes;
+            model.DisLikes = current.Dislikes;
             return View(model);
         }
 
@@ -211,7 +244,7 @@ namespace General_EvetsParty_MVC.Controllers
         {
             var model = new EditViewModel();
             var current = new EventManager().GetEventById(id);
-            CreateModel(id, model, current);
+            CreateModel(model, current);
 
             model.SelectedTypeId = current.Type.Id;
             model.SelectedPersonsCategoryId = current.PersonsCategory.Id;
@@ -233,57 +266,49 @@ namespace General_EvetsParty_MVC.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("ChangeEvent", new System.Web.Routing.RouteValueDictionary(model));
+                    currentEvent = model;
+                    return RedirectToAction("ChangeEvent");
                 }
             }
 
             return View(model);
         }
 
-        public ActionResult ChangeEvent(EditViewModel changedModel)
+        public ActionResult ChangeEvent()
         {
             string userName = HttpContext.User.Identity.Name;
 
             ChangeModel model = new ChangeModel();
-            model.Title = changedModel.Title;
-            model.StartTime = changedModel.StartTime;
-            model.Sponsors = changedModel.Sponsors;
-            model.ShortDescription = changedModel.ShortDescription;
-            model.SelectedTypeId = changedModel.SelectedTypeId;
-            model.SelectedPersonsCategoryId = changedModel.SelectedPersonsCategoryId;
-            model.Place = changedModel.Place;
-            model.Photos = changedModel.Photos;
-            model.Organizers = changedModel.Organizers;
-            model.IsFreeEntrance = changedModel.IsFreeEntrance;
-            model.IsCharitable = changedModel.IsCharitable;
-            model.Id = changedModel.Id;
-            model.Enter = changedModel.Enter;
-            model.EndTime = changedModel.EndTime;
-            model.Description = changedModel.Description;
+            model.Title = currentEvent.Title;
+            model.StartTime = currentEvent.StartTime;
+            model.Sponsors = currentEvent.Sponsors;
+            model.ShortDescription = currentEvent.ShortDescription;
+            model.SelectedTypeId = currentEvent.SelectedTypeId;
+            model.SelectedPersonsCategoryId = currentEvent.SelectedPersonsCategoryId;
+            model.Place = currentEvent.Place;
+            model.Photos = currentEvent.Photos;
+            model.Organizers = currentEvent.Organizers;
+            model.IsFreeEntrance = currentEvent.IsFreeEntrance;
+            model.IsCharitable = currentEvent.IsCharitable;
+            model.Id = currentEvent.Id;
+            model.Enter = currentEvent.Enter;
+            model.EndTime = currentEvent.EndTime;
+            model.Description = currentEvent.Description;
             
             //дописати додавання інших фото            
             if (manager.ChangeEvent(model))
             {
                 return RedirectToAction("EventDetails", "Event", new {id = model.Id});
             }
-            return View("Edit", changedModel);
+            return View("Edit", currentEvent);
         }
 
         public bool ChangeMainPhoto(int id)
         {
-            HttpPostedFile photo = System.Web.HttpContext.Current.Request.Files["HelpSectionImages"];
-            if (photo != null && photo.ContentLength > 0)
+            string newImage = GetPhoto();
+            if (newImage != null)
             {
-                var fileName = Path.GetFileName(photo.FileName);
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    photo.InputStream.CopyTo(ms);
-                    byte[] imageBytes = ms.ToArray();
-                    
-                    // Convert byte[] to Base64 String
-                    string newImage = Convert.ToBase64String(imageBytes);
-                    return manager.ChangeMainPhoto(id, newImage);
-                }
+                return manager.ChangeMainPhoto(id, newImage);
             }
             return false;
         }
@@ -295,6 +320,20 @@ namespace General_EvetsParty_MVC.Controllers
                 return RedirectToAction("Events", "Profile");
             }
             return RedirectToAction("Edit", new { id = id });
+        }
+
+        public string AddLike(int id, bool isLike)
+        {
+            if(User.Identity.IsAuthenticated)
+            {
+                var login = User.Identity.Name;
+                if ((manager as EventManager).AddLike(id, isLike, login))
+                {                    
+                    return "Success";
+                }
+                return "! You already voted";
+            }
+            return "! You need to login";            
         }
     }
 }

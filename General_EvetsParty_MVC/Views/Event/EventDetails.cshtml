@@ -6,6 +6,61 @@
 
 @section head{
     <link href="/Content/EventDetails/EventDetailsStyles.css" rel="stylesheet" />
+    <script>
+        $(document).ready(function () {
+            $("#like").click(function () {
+                $.ajax({
+                    url: "/Event/AddLike",
+                    type: "POST",
+                    data: {id : @Model.Id, isLike : true},
+                    success: function (data) {                        
+                        if(data == "Success")
+                        {
+                            var currentLike = parseInt($("#likesCount").text());
+                            var currentDislike = parseInt($("#dislikesCount").text());
+
+                            $("#dislikesCount").text(--currentDislike);
+                            $("#likesCount").text(++currentLike);
+                            alert("Thank you, your voice accepted");                            
+                        }  
+                        else
+                        {
+                            alert(data);
+                        }
+                    },
+                    error: function (data) {
+                        alert("some error");
+                    }
+                });
+            });
+
+            $("#dislike").click(function () {
+                $.ajax({
+                    url: "/Event/AddLike",
+                    type: "POST",
+                    data: {id : @Model.Id, isLike : false},
+                    success: function (data) {                        
+                        if(data == "Success")
+                        {
+                            var currentLike = parseInt($("#likesCount").text());
+                            var currentDislike = parseInt($("#dislikesCount").text());
+
+                            $("#dislikesCount").text(++currentDislike);
+                            $("#likesCount").text(--currentLike);
+                            alert("Thank you, your voice accepted");                            
+                        }  
+                        else
+                        {
+                            alert(data);
+                        }
+                    },
+                    error: function (data) {
+                        alert("some error");
+                    }
+                });
+            });
+        });
+    </script>
 }
 
 <div class="containmain">
@@ -49,7 +104,7 @@
 
         </div>
         <div id="EventPhoto">
-            <div id="typecat">
+            <div id="typecat" style="background-color:@Model.Type.Color">
                 <div id="typediv">
                     <span>@Html.DisplayFor(model => model.Type)</span>
                 </div>
@@ -108,8 +163,15 @@
     </div>
    <div id="marks">
                 <div class="eventmark">
-                    <img src="/images/like.png" title="like" /></div>
+                    <img src="/images/like.png" title="like" id="like"/>
+                    <div id="likesCount" class="count">@if (Model.Likes != null) { <span>@Model.Likes.Count</span>}
+                                                       else
+                                                       {<span>0</span>}</div>
+                    </div>
                 <div class="eventmark">
-                    <img src="/images/dislike.png" title="dislike" /></div>
+                    <div id="dislikesCount" class="count">@if (Model.DisLikes != null) { <span>@Model.DisLikes.Count</span>}
+                                                       else
+                                                       {<span>0</span>}</div>
+                    <img src="/images/dislike.png" title="dislike" id="dislike"/></div>
             </div>
 </div>

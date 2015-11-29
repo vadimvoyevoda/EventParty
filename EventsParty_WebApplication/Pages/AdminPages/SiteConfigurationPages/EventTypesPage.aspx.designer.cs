@@ -76,6 +76,33 @@ namespace EventsParty_WebApplication.Pages.AdminPages {
         protected global::System.Web.UI.WebControls.Label lbMsg;
         
         /// <summary>
+        /// upColor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upColor;
+        
+        /// <summary>
+        /// iColorPicker control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl iColorPicker;
+        
+        /// <summary>
+        /// hideCP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button hideCP;
+        
+        /// <summary>
         /// upGrid control.
         /// </summary>
         /// <remarks>

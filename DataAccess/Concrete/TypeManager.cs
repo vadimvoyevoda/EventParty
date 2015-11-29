@@ -86,5 +86,23 @@ namespace DataAccess.Concrete
                 return false;
             }
         }
+
+        public bool SetColor(int id, string color)
+        {
+            using (var ctx = new EventContext())
+            {
+                var suchType = (from t in ctx.EventTypes
+                                where t.Id == id
+                                select t).FirstOrDefault();
+
+                if (suchType != default(EventType))
+                {
+                    suchType.Color = color;
+                    ctx.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+        }
     }
 }

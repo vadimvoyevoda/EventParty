@@ -54,6 +54,7 @@ namespace DataModel
         public virtual List<EventCustomer> MayAttend { get; set; }
         public virtual List<EventCustomer> NoAttend { get; set; }
         public virtual List<EventLike> Likes { get; set; }
+        public virtual List<EventLike> Dislikes { get; set; }
         public virtual List<EventComment> Comments { get; set; }
         public virtual List<EventPhoto> Photos { get; set; }
     }
@@ -116,6 +117,8 @@ namespace DataModel
         [MaxLength(50)]
         [Index(IsUnique = true)]
         public string Type { get; set; }
+        public string Color { get; set; }
+        public string Image { get; set; }
 
         public virtual List<EventModel> SuchEvents { get; set; }
     }

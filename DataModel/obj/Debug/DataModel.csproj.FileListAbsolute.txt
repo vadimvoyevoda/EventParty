@@ -182,3 +182,5 @@ C:\Users\Olexandr007\Documents\EventsParty\DataModel\obj\Debug\DataModel.Migrati
 C:\Users\Olexandr007\Documents\EventsParty\DataModel\obj\Debug\DataModel.csproj.GenerateResource.Cache
 C:\Users\Olexandr007\Documents\EventsParty\DataModel\obj\Debug\DataModel.dll
 C:\Users\Olexandr007\Documents\EventsParty\DataModel\obj\Debug\DataModel.pdb
+C:\Users\Olexandr007\Documents\EventsParty\DataModel\obj\Debug\DataModel.Migrations.TypeExtend.resources
+C:\Users\Olexandr007\Documents\EventsParty\DataModel\obj\Debug\DataModel.Migrations.Dislikes.resources

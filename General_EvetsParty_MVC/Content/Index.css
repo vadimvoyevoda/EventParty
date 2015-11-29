@@ -33,3 +33,13 @@ body > div.main > div:nth-child(1) > div.row.content-top > div.col-md-5 > img{
 body > div.main > div:nth-child(1) > div.row.content-top > div.col-md-7.content_left_text{
     font-family:cursive;
 }
+
+@media (max-width:640px) {
+    input {
+        width:80%;
+    }
+
+    .search {
+        height:200px;
+    }
+}
