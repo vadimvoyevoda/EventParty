@@ -242,6 +242,7 @@ namespace General_EvetsParty_MVC.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
+            TempEventPhoto = null;
             var model = new EditViewModel();
             var current = new EventManager().GetEventById(id);
             CreateModel(model, current);

@@ -34,6 +34,26 @@ body > div.main > div:nth-child(1) > div.row.content-top > div.col-md-7.content_
     font-family:cursive;
 }
 
+#all {
+       text-transform: uppercase;
+    color: white;
+    background-color: #72D0F4;
+    width: 85%;
+    height: 35px;
+    border-radius: 10px;
+    text-align: center;
+    margin: auto;
+    margin-top: 12px;
+    box-shadow: 0 0 4px gray;
+    line-height: 35px;
+}
+
+#all:hover {
+    box-shadow: 0 0 10px gray;
+    background-color:rgba(175, 24, 67, 0.84);
+    font-size:14pt;           
+}
+
 @media (max-width:640px) {
     input {
         width:80%;

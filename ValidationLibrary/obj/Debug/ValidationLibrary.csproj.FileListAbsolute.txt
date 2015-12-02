@@ -71,3 +71,5 @@ C:\Users\Olexandr007\Documents\EventsParty\ValidationLibrary\obj\Debug\Validatio
 C:\Users\Olexandr007\Documents\EventsParty\ValidationLibrary\obj\Debug\ValidationLibrary.pdb
 C:\Users\Olexandr007\Documents\EventsParty\ValidationLibrary\bin\Debug\ChangeModelLibrary.dll
 C:\Users\Olexandr007\Documents\EventsParty\ValidationLibrary\bin\Debug\ChangeModelLibrary.pdb
+D:\Voyevoda\EventsParty\ValidationLibrary\bin\Debug\ChangeModelLibrary.dll
+D:\Voyevoda\EventsParty\ValidationLibrary\bin\Debug\ChangeModelLibrary.pdb

@@ -19,12 +19,8 @@ namespace General_EvetsParty_MVC.Controllers
         public ActionResult Index()
         {
             IEnumerable<EventModel> model = new List<EventModel>();
-            model = store.GetAllEvents().OrderByDescending(e => e.Id);
-            if (model.Count() > 9)
-            {
-                model = model.Take(9);
-            }
-
+            model = store.GetLastEvents(9,0);
+           
             foreach (var el in model)
             {
                 el.MainPhoto = new PhotoManager().GetImage(el.MainPhoto, Server.MapPath("~"), true);

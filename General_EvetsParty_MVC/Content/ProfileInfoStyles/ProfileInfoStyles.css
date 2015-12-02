@@ -1,9 +1,4 @@
-﻿fieldset {
-    display: inline;
-    border-left: 2px solid lightgray;
-}
-
-img {
+﻿img {
     max-height: 250px;
     max-width: 400px;
     vertical-align: top;
@@ -29,13 +24,9 @@ img {
     margin-left: 10px;
 }
 
-#profileMenu {
-    background-color: rgba(114, 208, 244, 0.18);
-}
-
 #img_info {
     background-color:white;    
-    min-width:600px;
+        margin-left: 15vw;
     text-align:center;
 }
 

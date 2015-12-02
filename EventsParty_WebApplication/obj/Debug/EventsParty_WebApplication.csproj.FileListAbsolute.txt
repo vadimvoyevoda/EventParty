@@ -195,3 +195,5 @@ C:\Users\Olexandr007\Documents\EventsParty\EventsParty_WebApplication\obj\Debug\
 C:\Users\Olexandr007\Documents\EventsParty\EventsParty_WebApplication\obj\Debug\EventsParty_WebApplication.pdb
 C:\Users\Olexandr007\Documents\EventsParty\EventsParty_WebApplication\bin\ChangeModelLibrary.dll
 C:\Users\Olexandr007\Documents\EventsParty\EventsParty_WebApplication\bin\ChangeModelLibrary.pdb
+D:\Voyevoda\EventsParty\EventsParty_WebApplication\bin\ChangeModelLibrary.dll
+D:\Voyevoda\EventsParty\EventsParty_WebApplication\bin\ChangeModelLibrary.pdb

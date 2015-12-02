@@ -10,7 +10,7 @@ namespace DataModel
     public class EventContext : DbContext
     {
         public EventContext()
-            : base("defaultConn3")
+            : base("defaultConn4")
         {
             Database.SetInitializer<EventContext>(null);
         }

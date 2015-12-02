@@ -202,3 +202,5 @@ C:\Users\Olexandr007\Documents\EventsParty\DataAccess\obj\Debug\DataAccess.dll
 C:\Users\Olexandr007\Documents\EventsParty\DataAccess\obj\Debug\DataAccess.pdb
 C:\Users\Olexandr007\Documents\EventsParty\DataAccess\bin\Debug\ChangeModelLibrary.dll
 C:\Users\Olexandr007\Documents\EventsParty\DataAccess\bin\Debug\ChangeModelLibrary.pdb
+D:\Voyevoda\EventsParty\DataAccess\bin\Debug\ChangeModelLibrary.dll
+D:\Voyevoda\EventsParty\DataAccess\bin\Debug\ChangeModelLibrary.pdb

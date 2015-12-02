@@ -5,6 +5,7 @@
 
 .pageContent {
     width: 100%;
+        text-align: center;
 }
 
 .myEventsClass {
@@ -53,4 +54,8 @@ li.room {
     word-wrap: break-word;
     color: white;
     padding-left:10px;
+}
+
+.borderS {
+    border-left: 2px solid lightgray;
 }

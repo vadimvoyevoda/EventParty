@@ -563,3 +563,5 @@ C:\Users\Olexandr007\Documents\EventsParty\General_EvetsParty_MVC\obj\Debug\Gene
 C:\Users\Olexandr007\Documents\EventsParty\General_EvetsParty_MVC\obj\Debug\General_EvetsParty_MVC.pdb
 C:\Users\Olexandr007\Documents\EventsParty\General_EvetsParty_MVC\bin\ChangeModelLibrary.dll
 C:\Users\Olexandr007\Documents\EventsParty\General_EvetsParty_MVC\bin\ChangeModelLibrary.pdb
+D:\Voyevoda\EventsParty\General_EvetsParty_MVC\bin\ChangeModelLibrary.dll
+D:\Voyevoda\EventsParty\General_EvetsParty_MVC\bin\ChangeModelLibrary.pdb

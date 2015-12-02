@@ -97,6 +97,17 @@ namespace DataAccess.Concrete
             }
         }
 
+        public List<EventModel> GetLastEvents(int count, int skip)
+        {
+            using (var ctx = new EventContext())
+            {
+                var res = ctx.Events.Include("Type").Include("PersonsCategory")
+                    .Include("Publisher").Include("City").Include("City.Region")
+                    .Include("City.Region.Country").Include("Likes").Include("Dislikes")
+                    .OrderByDescending(e => e.Id).Skip(skip).Take(count);
+                return res.ToList();
+            }
+        }
 
         public List<EventModel> GetFilteredEvents(SearchModel model)
         {
@@ -107,7 +118,9 @@ namespace DataAccess.Concrete
                     .Include("Publisher")
                     .Include("City")
                     .Include("City.Region")
-                    .Include("City.Region.Country");
+                    .Include("City.Region.Country")
+                    .Include("Likes")
+                    .Include("Dislikes");
 
                 PlaceFilter(model, ref res);
                 TimeFilter(model, ref res);

@@ -1,4 +1,8 @@
-﻿#profileMenu input[type="button"] {
+﻿#profileMenu {
+    background-color: rgba(114, 208, 244, 0.18);
+}
+
+#profileMenu input[type="button"] {
     display: block;
     width: 250px;
     height: 40px;
@@ -14,3 +18,7 @@
     color: white;
 }
 
+fieldset {
+    display: inline;
+    border-left: 2px solid lightgray;
+}

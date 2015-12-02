@@ -20,7 +20,7 @@
     @Html.ValidationSummary(true)
 
     <fieldset>
-        
+         <div id="changeinfo">
         <legend>Profile Edit</legend>
         @Html.HiddenFor(model => model.Id)
          
@@ -126,5 +126,6 @@
         <p class="editor-field">
             <input type="submit" value="Save" />
         </p>
+             </div>
     </fieldset>
 }
