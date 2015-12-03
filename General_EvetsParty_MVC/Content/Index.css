@@ -50,9 +50,32 @@ body > div.main > div:nth-child(1) > div.row.content-top > div.col-md-7.content_
 
 #all:hover {
     box-shadow: 0 0 10px gray;
-    background-color:rgba(175, 24, 67, 0.84);
     font-size:14pt;           
 }
+
+#types{
+       margin: auto;
+    margin-top: 30px;
+    width: 90%;
+}
+
+#types div {
+        display: inline-block;
+    color: white;
+    text-align: center;
+    font-size: 14pt;
+    margin-top: 1%;
+    margin-left: 1%;
+    height: 35px;
+    line-height: 35px;
+    width: 32%;
+        box-shadow: 0 0 5px gray;
+}
+
+#types div:hover
+{
+    box-shadow: 0 0 10px 2px gray;
+    }
 
 @media (max-width:640px) {
     input {
@@ -61,5 +84,17 @@ body > div.main > div:nth-child(1) > div.row.content-top > div.col-md-7.content_
 
     .search {
         height:200px;
+    }
+}
+
+@media (max-width:1150px) {
+    #types div {
+        width: 48%;
+    }
+}
+
+@media (max-width:640px) {
+    #types div {
+        width: 98%;
     }
 }

@@ -97,19 +97,23 @@ namespace DataAccess.Concrete
             }
         }
 
-        public List<EventModel> GetLastEvents(int count, int skip)
+        public int GetEventsCount()
         {
             using (var ctx = new EventContext())
             {
-                var res = ctx.Events.Include("Type").Include("PersonsCategory")
-                    .Include("Publisher").Include("City").Include("City.Region")
-                    .Include("City.Region.Country").Include("Likes").Include("Dislikes")
-                    .OrderByDescending(e => e.Id).Skip(skip).Take(count);
-                return res.ToList();
+                return ctx.Events.Count();
             }
         }
 
-        public List<EventModel> GetFilteredEvents(SearchModel model)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="count"></param>
+        /// <param name="skip"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public List<EventModel> GetFilteredEvents( SearchModel model=null, int count=-1, int skip=-1)
         {
             using (var ctx = new EventContext())
             {
@@ -120,13 +124,21 @@ namespace DataAccess.Concrete
                     .Include("City.Region")
                     .Include("City.Region.Country")
                     .Include("Likes")
-                    .Include("Dislikes");
+                    .Include("Dislikes")
+                    .OrderByDescending(e => e.Id);
 
-                PlaceFilter(model, ref res);
-                TimeFilter(model, ref res);
-                AddingFilter(model, ref res);
-                TextFilter(model, ref res);
+                if (count != -1)
+                {
+                    res = res.Skip(skip).Take(count);
+                }
 
+                if (model != null)
+                {
+                    PlaceFilter(model, ref res);
+                    TimeFilter(model, ref res);
+                    AddingFilter(model, ref res);
+                    TextFilter(model, ref res);
+                }
                 return res.ToList();
             }
         }

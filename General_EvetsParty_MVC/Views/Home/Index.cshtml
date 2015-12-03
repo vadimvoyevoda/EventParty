@@ -72,8 +72,13 @@
                 format: 'dd/mm/yyyy'              
             });
         });
-        </script>
-    
+    </script>
+    <div id="types">
+        @foreach (var type in ViewBag.Types)
+        {
+            <a href=@Url.Action("AdvancedSearch","Event",new{Types = type.Type})><div style="background-color:@type.Color">@type.Type</div></a>
+        }
+    </div>
     <div class="row content-top">
         <div class="col-md-5">
             <img src="/images/logo.png" class="img-responsive" alt="" />

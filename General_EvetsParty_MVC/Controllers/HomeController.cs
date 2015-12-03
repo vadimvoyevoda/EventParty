@@ -19,8 +19,8 @@ namespace General_EvetsParty_MVC.Controllers
         public ActionResult Index()
         {
             IEnumerable<EventModel> model = new List<EventModel>();
-            model = store.GetLastEvents(9,0);
-           
+            model = store.GetFilteredEvents(null,9,0);
+            ViewBag.Types = store.GetAllEventTypes();
             foreach (var el in model)
             {
                 el.MainPhoto = new PhotoManager().GetImage(el.MainPhoto, Server.MapPath("~"), true);

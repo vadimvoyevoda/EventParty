@@ -34,6 +34,7 @@ input[type="checkbox"] {
 #filteredSearch {
     color: white;
     background-color: #4DE04D;
+        border-radius: 4px;
 }
 
     #filteredSearch:hover {
@@ -62,4 +63,30 @@ label {
 
 .extend:hover {
     text-decoration: underline;
+}
+
+@media (max-width:1130px) {
+    .foundEvents {
+        width:65vw;
+    }
+}
+
+@media (max-width:810px) {
+    .foundEvents {
+        width:60vw;
+    }
+}
+
+@media (max-width:710px) {
+    .foundEvents {
+        width:0vw;
+    }
+}
+
+#pages div {
+    background-color: #72D0F4;
+    display: inline-block;
+    color: white;
+    padding: 8px;
+    border-radius: 8px;
 }

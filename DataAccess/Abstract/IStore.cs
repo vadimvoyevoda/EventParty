@@ -21,6 +21,7 @@ namespace DataAccess.Abstract
         List<EventCity> GetAllCities();
         List<EventRegion> GetAllRegions();
         List<EventModel> GetAllEvents();
-        List<EventModel> GetFilteredEvents(SearchModel model);
+        List<EventModel> GetFilteredEvents(SearchModel model = null, int count = -1, int skip = -1);
+        int GetEventsCount();
     }
 }

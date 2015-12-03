@@ -172,8 +172,8 @@
         @foreach (var type in ViewBag.Types)
         {
             <div>
-                <input type="checkbox" id="@type" class="cbType" value="@type" />
-                <label for="@type">@type</label>
+                <input type="checkbox" id="@type.Key" class="cbType" value="@type.Key" checked="@type.Value" />
+                <label for="@type.Key">@type.Key</label>
             </div>
         }
     </div>
@@ -201,6 +201,14 @@
 </div>
 <div class="foundEvents">
     <div class="pageContent">
+        <div id="pages">
+            <div id="Prev"><< Previous</div>
+            @for (int i = 1; i <= (ViewBag.PageCount > 5 ? 4 : ViewBag.PageCount); i++)
+            {
+                <div>@i</div>
+            }
+            <div id="Next">Next >></div>
+        </div>
         @Html.DisplayForModel()
     </div>
 </div>

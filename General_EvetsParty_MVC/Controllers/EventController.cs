@@ -21,6 +21,7 @@ namespace General_EvetsParty_MVC.Controllers
         IEventManager manager = new EventManager();
         static IWideModel currentEvent;
         static string TempEventPhoto= null;
+        static int EventsNumOnPage = 1;
 
         [HttpGet]
         public ActionResult Index()
@@ -109,7 +110,7 @@ namespace General_EvetsParty_MVC.Controllers
         public ActionResult AdvancedSearch(SearchModel searchModel)
         {
             IEnumerable<EventModel> model = new List<EventModel>();
-            model = store.GetFilteredEvents(searchModel).OrderByDescending(e=>e.Id);            
+            model = store.GetFilteredEvents(searchModel,1,0);            
 
             foreach (var el in model)
             {
@@ -121,7 +122,16 @@ namespace General_EvetsParty_MVC.Controllers
                 return PartialView("FilteredSearch", model);
             }
 
-            ViewBag.Types = store.GetAllEventTypes().Select(t => t.Type);
+            var types = new Dictionary<string, bool>();
+            var allTypes = store.GetAllEventTypes().Select(t => t.Type);
+            
+            foreach (var type in allTypes)
+            {
+                types.Add(type, searchModel.Types != null ? searchModel.Types.Contains(type):false);
+            }
+
+            ViewBag.PageCount = store.GetEventsCount() / EventsNumOnPage;
+            ViewBag.Types = types;            
             ViewBag.Categories = store.GetAllPersonCategories().Select(c => c.Category);
                         
             return View(model);

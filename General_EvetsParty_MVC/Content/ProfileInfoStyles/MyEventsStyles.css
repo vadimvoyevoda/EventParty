@@ -4,8 +4,9 @@
 }
 
 .pageContent {
-    width: 100%;
-        text-align: center;
+   width: 100%;
+   margin-top: 10px;
+       margin-left: 5%;
 }
 
 .myEventsClass {
@@ -58,4 +59,16 @@ li.room {
 
 .borderS {
     border-left: 2px solid lightgray;
+}
+
+@media (max-width:1145px) {
+    .myEventsClass {
+        width: 70%;
+    }
+}
+
+@media (max-width:870px) {
+    .myEventsClass {
+        width: 58%;
+    }
 }
