@@ -9,10 +9,12 @@
     <link rel="stylesheet" type="text/css" href="/Content/ProfileInfoStyles/MyEventsStyles.css" />
     <link rel="stylesheet" type="text/css" href="/Content/bootstrap-datetimepicker.min.css" />
     <link rel="stylesheet" type="text/css" href="/Content/AdvancedSearch/SearchStyles.css" />
+    <link href="/Content/PagingStyle.css" rel="stylesheet" />
+
     <script type="text/javascript">
         $(document).ready(function () {
             $("#advancedSearch").addClass("active");
-
+            
             $("#filteredSearch").click(function () {
                 var seltypes = new Array();
                 var selcategories = new Array();
@@ -202,13 +204,75 @@
 <div class="foundEvents">
     <div class="pageContent">
         <div id="pages">
-            <div id="Prev"><< Previous</div>
-            @for (int i = 1; i <= (ViewBag.PageCount > 5 ? 4 : ViewBag.PageCount); i++)
+            @if (ViewBag.Page == 1)
             {
-                <div>@i</div>
+                <div style="background-color: rgba(128, 128, 128, 0.43);"><< Previous</div>
             }
-            <div id="Next">Next >></div>
+            else
+            {
+                <a href="/Event/PrevPage"><div id="Prev"><< Previous</div></a>
+            }
+            @if (ViewBag.PageCount > 5)
+            {
+                int count = 4;
+                int start = ViewBag.Page > count / 2 ? ViewBag.Page - count / 2 : 1;
+
+                if (start > ViewBag.PageCount - count)
+                {
+                    start = ViewBag.PageCount - count;
+                }
+                
+                if(start > 1)
+                {
+                    <a href=@Url.Action("PageLoad", "Event", new { page = start - 1})><div >...</div></a>
+                }
+                for (int i = start; i <= (ViewBag.PageCount >= start + count ? start + count : ViewBag.PageCount); i++)
+                {
+                    <a href="/Event/PageLoad?page=@i">
+                    @if (ViewBag.Page == i)
+                    {
+                        <div style="background-color: rgb(30, 121, 228);">@i</div>
+                    }
+                    else
+                    {
+                        <div>@i</div>
+                    }
+                    </a>
+                }
+                if (start + count != ViewBag.PageCount)
+                {               
+                    <a href=@Url.Action("PageLoad", "Event", 
+                    new { page = start + count + 1 < ViewBag.PageCount ? start + count + 1: ViewBag.PageCount })>
+                        <div >...</div></a>
+                }
+            }
+            else
+            {
+                for (int i = 1; i <= ViewBag.PageCount; i++)
+                {
+                    <a href="/Event/PageLoad?page=@i">
+                    @if (ViewBag.Page == i)
+                    {
+                        <div style="background-color: rgb(30, 121, 228);">@i</div>
+                    }
+                    else
+                    {
+                        <div>@i</div>
+                    }
+                    </a>
+                }
+            }
+            @if (ViewBag.Page == ViewBag.PageCount)
+            {
+                <div style="background-color: rgba(128, 128, 128, 0.43);">Next >></div>
+            }
+            else
+            {
+                <a href="/Event/NextPage"><div id="Next">Next >></div></a>
+            }
         </div>
         @Html.DisplayForModel()
+        
+        <div><a href="#menu">Go to Top >></a></div>
     </div>
 </div>

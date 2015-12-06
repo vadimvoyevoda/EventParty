@@ -96,7 +96,7 @@ namespace DataAccess.Concrete
                     .Include("City.Region.Country").Include("Likes").Include("Dislikes").ToList();
             }
         }
-
+        
         public int GetEventsCount()
         {
             using (var ctx = new EventContext())
@@ -105,6 +105,24 @@ namespace DataAccess.Concrete
             }
         }
 
+        public List<EventModel> GetUserEvents(string Login, int count = -1, int skip = -1)
+        {
+            using (var ctx = new EventContext())
+            {
+                 IEnumerable<EventModel> res = ctx.Events.Include("Type").Include("PersonsCategory")
+                    .Include("Publisher").Include("City").Include("City.Region")
+                    .Include("City.Region.Country").Include("Likes").Include("Dislikes")
+                    .Where(e=>e.Publisher.Login==Login)
+                    .OrderByDescending(e => e.Id);
+                
+                if (count != -1)
+                {
+                    res = res.Skip(skip).Take(count);
+                }
+
+                return res.ToList();
+            }
+        }
 
         /// <summary>
         /// 

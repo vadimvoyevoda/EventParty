@@ -22,6 +22,8 @@ namespace General_EvetsParty_MVC.Controllers
         static IWideModel currentEvent;
         static string TempEventPhoto= null;
         static int EventsNumOnPage = 1;
+        static int PageNum = 1;
+        static SearchModel searchModel;
 
         [HttpGet]
         public ActionResult Index()
@@ -107,15 +109,18 @@ namespace General_EvetsParty_MVC.Controllers
             return View("Index", currentEvent);
         }
 
-        public ActionResult AdvancedSearch(SearchModel searchModel)
+        public ActionResult AdvancedSearch(SearchModel searchModel, int pageNum = 1)
         {
             IEnumerable<EventModel> model = new List<EventModel>();
-            model = store.GetFilteredEvents(searchModel,1,0);            
+            PageNum = pageNum;
+            model = store.GetFilteredEvents(searchModel, EventsNumOnPage, (pageNum - 1)*EventsNumOnPage);            
 
             foreach (var el in model)
             {
                 el.MainPhoto = new PhotoManager().GetImage(el.MainPhoto, Server.MapPath("~"), true);
             }
+
+            ViewBag.Page = PageNum;
 
             if (searchModel.Filter)
             {
@@ -345,6 +350,21 @@ namespace General_EvetsParty_MVC.Controllers
                 return "! You already voted";
             }
             return "! You need to login";            
+        }
+
+        public ActionResult PageLoad(int page)
+        {
+            return RedirectToAction("AdvancedSearch", new { pageNum = page });
+        }
+
+        public ActionResult PrevPage()
+        {
+            return RedirectToAction("AdvancedSearch", new { pageNum = PageNum - 1 });
+        }
+
+        public ActionResult NextPage()
+        {
+            return RedirectToAction("AdvancedSearch", new { pageNum = PageNum + 1 });
         }
     }
 }

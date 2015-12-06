@@ -19,7 +19,9 @@ namespace General_EvetsParty_MVC.Controllers
         // GET: /Profile/
         DbStore store = new DbStore();
         IUserManager manager = new DbUserManager();
-        static EventCustomer current; 
+        static EventCustomer current;
+        static int EventsNumOnPage = 1;
+        static int PageNum = 1;
 
         public ActionResult Index()
         {
@@ -65,14 +67,16 @@ namespace General_EvetsParty_MVC.Controllers
             return false;
         }
 
-        public ActionResult Events()
+        public ActionResult Events(int pageNum=1)
         {
-            var model = store.GetAllEvents().Where(e => e.Publisher.Login == HttpContext.User.Identity.Name).OrderByDescending(e=>e.Id);
+            PageNum = pageNum;
+            var model = store.GetUserEvents(HttpContext.User.Identity.Name, EventsNumOnPage, (pageNum - 1) * EventsNumOnPage);
             foreach (var el in model)
             {
                 el.MainPhoto = new PhotoManager().GetImage(el.MainPhoto, Server.MapPath("~"), true);
             }
-            
+            ViewBag.Page = PageNum;
+            ViewBag.PageCount = store.GetEventsCount() / EventsNumOnPage;
             return View(model);
         }
 
@@ -118,6 +122,21 @@ namespace General_EvetsParty_MVC.Controllers
 
             return View(customer);
             
+        }
+
+        public ActionResult PageLoad(int page)
+        {
+            return RedirectToAction("Events", new { pageNum = page });
+        }
+
+        public ActionResult PrevPage()
+        {
+            return RedirectToAction("Events", new { pageNum = PageNum - 1 });
+        }
+
+        public ActionResult NextPage()
+        {
+            return RedirectToAction("Events", new { pageNum = PageNum + 1 });
         }
     }
 }

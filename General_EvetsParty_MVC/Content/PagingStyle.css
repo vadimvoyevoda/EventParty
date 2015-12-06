@@ -1,0 +1,11 @@
+﻿
+#pages div {
+    background-color: #72D0F4;
+    display: inline-block;
+    color: white;
+    padding: 8px;
+    border-radius: 8px;
+        min-width: 38px;
+    text-align: center;
+        margin-bottom: 10px;
+}

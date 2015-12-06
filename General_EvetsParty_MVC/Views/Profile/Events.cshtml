@@ -7,6 +7,7 @@
 
 @section head{
     <link rel="stylesheet" type="text/css" href="/Content/ProfileInfoStyles/MyEventsStyles.css" />   
+    <link href="/Content/PagingStyle.css" rel="stylesheet" />
 
     <script type="text/javascript">
         $(document).ready(function () {           
@@ -18,6 +19,75 @@
 
 <div class="myEventsClass borderS">
     <div class="pageContent">
+        <div id="pages">
+            @if (ViewBag.Page == 1)
+            {
+                <div style="background-color: rgba(128, 128, 128, 0.43);"><< Previous</div>
+            }
+            else
+            {
+                <a href="/Profile/PrevPage"><div id="Prev"><< Previous</div></a>
+            }
+            @if (ViewBag.PageCount > 5)
+            {
+                int count = 4;
+                int start = ViewBag.Page > count / 2 ? ViewBag.Page - count / 2 : 1;
+
+                if (start > ViewBag.PageCount - count)
+                {
+                    start = ViewBag.PageCount - count;
+                }
+                
+                if(start > 1)
+                {
+                    <a href=@Url.Action("PageLoad", "Profile", new { page = start - 1})><div >...</div></a>
+                }
+                for (int i = start; i <= (ViewBag.PageCount >= start + count ? start + count : ViewBag.PageCount); i++)
+                {
+                    <a href="/Profile/PageLoad?page=@i">
+                    @if (ViewBag.Page == i)
+                    {
+                        <div style="background-color: rgb(30, 121, 228);">@i</div>
+                    }
+                    else
+                    {
+                        <div>@i</div>
+                    }
+                    </a>
+                }
+                if (start + count != ViewBag.PageCount)
+                {               
+                    <a href=@Url.Action("PageLoad", "Profile", 
+                    new { page = start + count + 1 < ViewBag.PageCount ? start + count + 1: ViewBag.PageCount })>
+                        <div >...</div></a>
+                }
+            }
+            else
+            {
+                for (int i = 1; i <= ViewBag.PageCount; i++)
+                {
+                    <a href="/Profile/PageLoad?page=@i">
+                    @if (ViewBag.Page == i)
+                    {
+                        <div style="background-color: rgb(30, 121, 228);">@i</div>
+                    }
+                    else
+                    {
+                        <div>@i</div>
+                    }
+                    </a>
+                }
+            }
+            @if (ViewBag.Page == ViewBag.PageCount)
+            {
+                <div style="background-color: rgba(128, 128, 128, 0.43);">Next >></div>
+            }
+            else
+            {
+                <a href="/Profile/NextPage"><div id="Next">Next >></div></a>
+            }
+        </div>
         @Html.DisplayForModel()
+        <div><a href="#menu">Go to Top >></a></div>
     </div>
 </div>

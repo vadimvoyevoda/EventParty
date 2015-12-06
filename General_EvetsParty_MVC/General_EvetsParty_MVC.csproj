@@ -206,6 +206,7 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\Index.css" />
     <Content Include="Content\jquery-ui.css" />
+    <Content Include="Content\PagingStyle.css" />
     <Content Include="Content\ProfileInfoStyles\MyEventsStyles.css" />
     <Content Include="Content\ProfileInfoStyles\ProfileInfoStyles.css" />
     <Content Include="Content\ProfileInfoStyles\ProfileStyles.css" />
